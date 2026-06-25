@@ -94,7 +94,9 @@ button, input, select, textarea {
   padding: 3px 10px; border-radius: 99px; font-weight: 500;
 }
 
-/* ── BUTTONS ──────────────────────────────────── */
+/* ── BUTTONS 
+  On help page, the report, support line, and email need a link
+  ──────────────────────────────────── */
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 8px 18px; border-radius: var(--radius);
@@ -177,6 +179,22 @@ button, input, select, textarea {
 
 /* ════════════════════════════════════════════════
    SCREEN: HOME
+  Add in back to top option on every page
+  Add in moveable map
+  I feel more quick filters could be added
+  Make filters to where they don’t autosave if you re-open a window
+  When going into different windows, the link needs to change
+  After pressing the I understand box shorten the please read statement into a smaller window out of the users’ way
+  Make the personalized search not apply when left blank & ofc make that work
+  Make the search bar work for misspells 
+  Make it so that users can change their location on any page
+  Put categories on top of the boxes "restaurant search…”
+  Possible rename of the popular near st louis to quick options and add the budget-friendly picks to the categories
+  Make it so that the user can go back a page
+  The bottom of the page needs some options and all pages need a go to top option
+  When pressing a quick filter on the home page, make it add it to the search bar
+  Make it to where you can select multiple filters at once and the search results will show that
+  
 ════════════════════════════════════════════════ */
 #screen-home {}
 
@@ -370,7 +388,7 @@ button, input, select, textarea {
 .reviewer { font-size: 14px; font-weight: 600; }
 .review-date { font-size: 12px; color: var(--text3); }
 .review-body { font-size: 14px; color: var(--text2); line-height: 1.6; }
-
+/* Expand feature 
 /* ════════════════════════════════════════════════
    SCREEN: FORUM
 ════════════════════════════════════════════════ */
@@ -1020,6 +1038,12 @@ button, input, select, textarea {
 
 <!-- ══════════════════════════════════════════════
      SCREEN: FORUM
+  Make an option in the community forum for specific ingredients and a dropdown for which ingredient
+  Make it to where the report button & comment button + forum post won’t accept a blank description 
+  Make the like button on the forum page work
+  Make it to where you can save forums for future use and share them
+  Make forum search bar and topic options (make sure they align with the users’ options) work
+  
 ══════════════════════════════════════════════ -->
 <div id="screen-forum" class="screen">
   <div class="forum-wrap">
@@ -1189,6 +1213,9 @@ button, input, select, textarea {
 
 <!-- ══════════════════════════════════════════════
      SCREEN: RETAILER PORTAL (post-login dashboard)
+  Only have the submitted by retailer on a product that actually got updated by that retailer
+  Make sure the updated fields are accurate - if a retailer didn’t enter it themselves provide a bolded easy to read warning
+  Make retailer windows noticeable that they are for the retailer after they login
 ══════════════════════════════════════════════ -->
 <div id="screen-retailer-portal" class="screen">
   <div class="portal-wrap">
@@ -1437,7 +1464,9 @@ button, input, select, textarea {
           </div>
         </div>
 
-        <!-- VIEW: USER REPORTS -->
+        <!-- VIEW: USER REPORTS 
+        On help page, the report, support line, and email need a link
+        -->
         <div id="portal-view-reports" class="portal-view">
           <div class="portal-section-head" style="margin-bottom:1rem;">
             <h3>User-submitted ingredient reports</h3>
@@ -1820,7 +1849,9 @@ button, input, select, textarea {
     </div>
   </div>
 
-  <!-- Help modal -->
+  <!-- Help modal 
+  On help page, the report, support line, and email need a link
+  -->
   <div id="modal-help" class="modal hidden">
     <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
     <h2>Help & support</h2>
