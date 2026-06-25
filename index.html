@@ -2081,5 +2081,34 @@ function toast(msg, type) {
 // Init
 showScreen('home');
 </script>
+ <script>
+function applyProfileSettings() {
+  const pageColor = document.getElementById("pageColor").value;
+  const textSize = document.getElementById("textSize").value;
+
+  document.body.style.backgroundColor = pageColor;
+  document.body.style.fontSize = textSize;
+
+  localStorage.setItem("pageColor", pageColor);
+  localStorage.setItem("textSize", textSize);
+
+  toast("Profile settings saved!", "success");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const savedColor = localStorage.getItem("pageColor");
+  const savedTextSize = localStorage.getItem("textSize");
+
+  if (savedColor && document.getElementById("pageColor")) {
+    document.body.style.backgroundColor = savedColor;
+    document.getElementById("pageColor").value = savedColor;
+  }
+
+  if (savedTextSize && document.getElementById("textSize")) {
+    document.body.style.fontSize = savedTextSize;
+    document.getElementById("textSize").value = savedTextSize;
+  }
+});
+</script> 
 </body>
 </html>
