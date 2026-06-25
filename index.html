@@ -1746,94 +1746,14 @@ button, input, select, textarea {
       <label>Business website or social profile (optional)</label>
       <input class="form-control" type="url" placeholder="https://yourrestaurant.com">
     </div>
-<div class="security-note" style="margin-top:1rem;">
-  <i class="fa-solid fa-scale-balanced" style="color:var(--green);"></i>
-  <span style="font-size:12px;">
-    Check with an attorney regarding the required size, placement, and wording of legal notices before publishing.
-  </span>
-</div>
-
-<div class="modal-footer">
-  <button class="btn" onclick="closeModal()">Cancel</button>
-  <button class="btn btn-primary" onclick="submitBusinessApplication()">
-    Submit application
-  </button>
-</div>
-
-<div class="profile-settings">
-  <h3>Profile Settings</h3>
-
-  <div class="form-group">
-    <label>Page color</label>
-    <input class="form-control" type="color" id="pageColor" value="#ffffff">
-  </div>
-
-  <div class="form-group">
-    <label>Text size</label>
-    <select class="form-control" id="textSize">
-      <option value="14px">Small</option>
-      <option value="16px" selected>Medium</option>
-      <option value="18px">Large</option>
-      <option value="20px">Extra Large</option>
-    </select>
-  </div>
-
-  <button class="btn btn-primary" onclick="applyProfileSettings()">
-    Save Settings
-  </button>
-</div>
-
-<script>
-function submitBusinessApplication() {
-  const requiredFields = document.querySelectorAll("input[required], select[required], textarea[required]");
-  let allFilled = true;
-
-  requiredFields.forEach(field => {
-    if (!field.value.trim()) {
-      allFilled = false;
-      field.style.border = "2px solid red";
-    } else {
-      field.style.border = "";
-    }
-  });
-
-  if (!allFilled) {
-    toast("Please fill out all required fields.", "error");
-    return;
-  }
-
-  closeModal();
-  toast("Application submitted! We'll be in touch within 2–3 business days.", "success");
-}
-
-function applyProfileSettings() {
-  const pageColor = document.getElementById("pageColor").value;
-  const textSize = document.getElementById("textSize").value;
-
-  document.body.style.backgroundColor = pageColor;
-  document.body.style.fontSize = textSize;
-
-  localStorage.setItem("pageColor", pageColor);
-  localStorage.setItem("textSize", textSize);
-
-  toast("Profile settings saved!", "success");
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-  const savedColor = localStorage.getItem("pageColor");
-  const savedTextSize = localStorage.getItem("textSize");
-
-  if (savedColor && document.getElementById("pageColor")) {
-    document.body.style.backgroundColor = savedColor;
-    document.getElementById("pageColor").value = savedColor;
-  }
-
-  if (savedTextSize && document.getElementById("textSize")) {
-    document.body.style.fontSize = savedTextSize;
-    document.getElementById("textSize").value = savedTextSize;
-  }
-});
-</script>
+ <div class="security-note" style="margin-top:1rem;">
+      <i class="fa-solid fa-lock" style="color:var(--green);"></i>
+      <span style="font-size:12px;">Your application is reviewed by our team. We may contact you via the email or phone provided to verify your identity before approving access.</span>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal();toast('Application submitted! We\'ll be in touch within 2–3 business days.','success')">Submit application</button>
+    </div>
   </div>
 
   <!-- Questionnaire modal -->
