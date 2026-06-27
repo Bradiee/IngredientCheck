@@ -1233,9 +1233,8 @@ button, input, select, textarea {
         <div style="font-size:11px;color:#a0a8c8;">Sunset Hills, MO</div>
       </div>
       
-      <div class="brand" onclick="showPortalView('dashboard')" style="cursor:pointer;">
+      <div class="brand" onclick="showScreen('home')" style="cursor:pointer;">
         The Ingredient Check
-        <span style="font-size:10px;color:#7dd3bc;display:block;font-weight:400;">Retailer Portal · Signed in</span>
       </div>
       <div class="sidebar-item active" onclick="showPortalView('dashboard')">
         <i class="fa-solid fa-chart-line"></i> Dashboard
@@ -1346,9 +1345,6 @@ button, input, select, textarea {
                   <td>Jun 12, 2026</td>
                   <td><button class="btn btn-sm btn-ghost" onclick="showPortalView('add-product')"><i class="fa-solid fa-pen"></i> Edit</button></td>
                 </tr>
-                    <button class="btn btn-sm btn-ghost" onclick="showPortalView('add-product')"><i class="fa-solid fa-pen"></i> Edit</button>
-                  </td>
-                </tr>
                 <tr>
                   <td>Garlic Knots</td>
                   <td><span class="pill pill-gray">Restaurant item</span></td>
@@ -1359,7 +1355,7 @@ button, input, select, textarea {
                   </td>
                 </tr>
                 <tr>
-                  <td><strong>BBQ Chicken Pizza</strong></td>
+                  <td>BBQ Chicken Pizza</td>
                   <td><span class="pill pill-gray">Restaurant item</span></td>
                   <td><span class="pill pill-blue"><i class="fa-solid fa-clock"></i> Under review</span></td>
                   <td>May 28, 2026</td>
@@ -1421,7 +1417,7 @@ button, input, select, textarea {
             </div>
 
             <div style="margin-bottom:1rem;">
-              <label style="font-size:13px;font-weight:600;color:var(--text2);display:block;margin-bottom:8px;">Allergen declarations — check all that apply</label>
+              <label style="font-size:13px;font-weight:400;color:var(--text2);display:block;margin-bottom:8px;">Allergen declarations — check all that apply</label>
               <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;">
                 <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox"> Contains peanuts</label>
                 <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox"> Contains tree nuts</label>
@@ -1469,7 +1465,7 @@ button, input, select, textarea {
             </div>
 
             <div style="background:var(--bg2);border-radius:var(--radius);padding:1rem;margin-bottom:1.25rem;font-size:13px;color:var(--text2);line-height:1.6;">
-              <strong style="display:block;margin-bottom:4px;color:var(--text1);">By submitting, you confirm that:</strong>
+              <span style="display:block;margin-bottom:4px;color:var(--text1);">By submitting, you confirm that:</span>
               <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;"> The ingredient information I am submitting is accurate and up to date to the best of my knowledge.</label>
               <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;"> I understand that IngredientCheck will display this data as-is and users rely on it for health decisions.</label>
               <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;"> I will notify IngredientCheck promptly if this information changes.</label>
@@ -1495,13 +1491,12 @@ button, input, select, textarea {
 
           <div class="card" style="border-left:3px solid var(--red);margin-bottom:10px;">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-              <td style="font-size:15px;">Garlic Knots</td>
+              <span style="font-size:15px;">Garlic Knots</span>
               <span class="pill pill-red">New</span>
             </div>
               <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:10px;">A user reported that the garlic knots now use a butter blend containing dairy, but the listing still says no dairy ingredients. They attached a label photo showing butter (milk).</p>
             <div style="font-size:12px;color:var(--text3);margin-bottom:10px;">Reported by a verified user · June 17, 2026</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
-             <button class="btn btn-primary btn-sm" onclick="showPortalView('add-product');toast('Editing Garlic Knots listing…')">
               <button class="btn btn-primary btn-sm" onclick="showPortalView('add-product')"><i class="fa-solid fa-pen"></i> Update listing</button>
               <button class="btn btn-sm" onclick="toast('Report escalated to moderator.','success')"><i class="fa-solid fa-flag"></i> Escalate to moderator</button>
               <button class="btn btn-sm btn-ghost" onclick="toast('Report marked as reviewed.')">Mark reviewed</button>
@@ -1510,7 +1505,7 @@ button, input, select, textarea {
 
           <div class="card" style="border-left:3px solid var(--amber);margin-bottom:10px;">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-              <strong style="font-size:15px;">BBQ Chicken Pizza</strong>
+              <span style="font-size:15px;">BBQ Chicken Pizza</span>
               <span class="pill pill-amber">In review</span>
             </div>
               <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:10px;">A user reported the BBQ sauce appears to contain high fructose corn syrup, which isn't listed in the current ingredients.</p>
@@ -1566,19 +1561,20 @@ button, input, select, textarea {
                 <input type="color" id="pageColor" value="#f5f7f5" class="form-control" style="height:42px;padding:4px;">
               </div>
               <div class="form-group">
-                <label>Text size</label>
-                <select id="textSize" class="form-control">
-                  <option value="14px">Small</option>
-                  <option value="15px" selected>Default</option>
-                  <option value="17px">Large</option>
-                  <option value="19px">Extra large</option>
+                <label>Font style</label>
+                <select id="fontStyle" class="form-control">
+                  <option value="'Inter', sans-serif" selected>Inter (default)</option>
+                  <option value="Georgia, serif">Georgia</option>
+                  <option value="'Courier New', monospace">Courier</option>
+                  <option value="Arial, sans-serif">Arial</option>
+                  <option value="'Times New Roman', serif">Times New Roman</option>
                 </select>
               </div>
             </div>
             <button class="btn btn-primary btn-sm" onclick="applyProfileSettings()">Save display settings</button>
           </div>
           <div class="card" style="margin-bottom:1rem;">
-            <h4 style="font-size:14px;font-weight:600;margin-bottom:1rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;font-size:12px;">Business information</h4>
+            <h4 style="font-size:14px;font-weight:400;margin-bottom:1rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;font-size:12px;">Business information</h4>
             <div class="form-row">
               <div class="form-group">
                 <label>Business name</label>
@@ -2064,29 +2060,24 @@ showScreen('home');
  <script>
 function applyProfileSettings() {
   const pageColor = document.getElementById("pageColor").value;
-  const textSize = document.getElementById("textSize").value;
-
+  const fontStyle = document.getElementById("fontStyle").value;
   document.body.style.backgroundColor = pageColor;
-  document.body.style.fontSize = textSize;
-
+  document.body.style.fontFamily = fontStyle;
   localStorage.setItem("pageColor", pageColor);
-  localStorage.setItem("textSize", textSize);
-
-  toast("Profile settings saved!", "success");
+  localStorage.setItem("fontStyle", fontStyle);
+  toast("Display settings saved!", "success");
 }
 
 window.addEventListener("DOMContentLoaded", () => {
   const savedColor = localStorage.getItem("pageColor");
-  const savedTextSize = localStorage.getItem("textSize");
-
-  if (savedColor && document.getElementById("pageColor")) {
+  const savedFont = localStorage.getItem("fontStyle");
+  if (savedColor) {
     document.body.style.backgroundColor = savedColor;
-    document.getElementById("pageColor").value = savedColor;
+    const c = document.getElementById("pageColor"); if (c) c.value = savedColor;
   }
-
-  if (savedTextSize && document.getElementById("textSize")) {
-    document.body.style.fontSize = savedTextSize;
-    document.getElementById("textSize").value = savedTextSize;
+  if (savedFont) {
+    document.body.style.fontFamily = savedFont;
+    const f = document.getElementById("fontStyle"); if (f) f.value = savedFont;
   }
 });
 </script> 
