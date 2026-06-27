@@ -24,7 +24,16 @@ button, input, select, textarea {
   font-family: inherit;
   font-size: inherit;
 }
-
+/* Normalize all text in retailer portal to regular weight */
+.portal-main, .portal-main * {
+  font-weight: 400 !important;
+}
+/* Allow headings to stay slightly heavier if you want */
+.portal-main h2,
+.portal-main h3 {
+  font-weight: 500 !important;
+}
+  
 /* ── COLOUR TOKENS ────────────────────────────── */
 :root {
   --green:       #1D9E75;
@@ -617,8 +626,8 @@ button, input, select, textarea {
   <button onclick="document.getElementById('demo-banner').style.display='none'" style="background:rgba(255,255,255,0.15);border:none;color:#fff;border-radius:6px;padding:3px 10px;font-size:12px;cursor:pointer;margin-left:6px;">Dismiss</button>
 </div>
 <nav id="nav">
-  <div class="nav-logo" onclick="showScreen('home')" style="overflow:hidden;height:64px;display:flex;align-items:center;">
-    <img src="IMG_6738.jpeg" alt="The Ingredient Check" style="height:120px;width:auto;margin:-28px 0;">
+  <div class="nav-logo" onclick="showScreen('home')" style="overflow:hidden;height:60px;display:flex;align-items:center;">
+  <img src="IMG_6738.jpeg" alt="The Ingredient Check" style="height:130px;width:auto;margin:-30px 0 -40px 0;">
   </div>
   </div>
   <div class="nav-links">
@@ -1227,6 +1236,7 @@ button, input, select, textarea {
       
       <div class="brand" onclick="showPortalView('dashboard')" style="cursor:pointer;">
         The Ingredient Check
+        <span style="font-size:10px;color:#7dd3bc;display:block;font-weight:400;">Retailer Portal · Signed in</span>
       </div>
       <div class="sidebar-item active" onclick="showPortalView('dashboard')">
         <i class="fa-solid fa-chart-line"></i> Dashboard
