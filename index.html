@@ -633,6 +633,7 @@ button, input, select, textarea {
     <a onclick="showScreen('home')" id="nav-home">Home</a>
     <a onclick="showScreen('results')" id="nav-browse">Browse</a>
     <a onclick="showScreen('forum')" id="nav-forum">Forum</a>
+    <a onclick="showModal('user-settings')">Settings</a>
     <a onclick="showModal('help')">Help</a>
     <a onclick="showModal('tos')">Terms of Service</a>
   </div>
@@ -1898,7 +1899,32 @@ button, input, select, textarea {
       <button class="btn btn-primary" onclick="closeModal()">Got it</button>
     </div>
   </div>
-
+<div id="modal-user-settings" class="modal hidden">
+  <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+  <h2>Account settings</h2>
+  <p>Customize your display and manage your preferences.</p>
+  <div class="form-group">
+    <label>Page background color</label>
+    <input type="color" id="userPageColor" value="#f5f7f5" class="form-control" style="height:42px;padding:4px;">
+  </div>
+  <div class="form-group">
+    <label>Font style</label>
+    <select id="userFontStyle" class="form-control">
+      <option value="'Inter', sans-serif" selected>Inter (default)</option>
+      <option value="Georgia, serif">Georgia</option>
+      <option value="'Courier New', monospace">Courier</option>
+      <option value="Arial, sans-serif">Arial</option>
+      <option value="'Times New Roman', serif">Times New Roman</option>
+    </select>
+  </div>
+  <div class="form-group" style="margin-bottom:0;">
+    <label>Default location</label>
+    <input class="form-control" type="text" id="userLocation" placeholder="St. Louis, MO">
+  </div>
+  <div class="modal-footer">
+    <button class="btn" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" onclick="applyUserSettings()">Save settings</button>
+  </div>
 </div><!-- /modal-backdrop -->
 
 <!-- Toast container -->
@@ -2058,28 +2084,53 @@ function toast(msg, type) {
 showScreen('home');
 </script>
  <script>
+/* ── RETAILER display settings ── */
 function applyProfileSettings() {
-  const pageColor = document.getElementById("pageColor").value;
-  const fontStyle = document.getElementById("fontStyle").value;
-  document.body.style.backgroundColor = pageColor;
-  document.body.style.fontFamily = fontStyle;
-  localStorage.setItem("pageColor", pageColor);
-  localStorage.setItem("fontStyle", fontStyle);
+  const c = document.getElementById("pageColor").value;
+  const f = document.getElementById("fontStyle").value;
+  document.body.style.backgroundColor = c;
+  document.body.style.fontFamily = f;
+  localStorage.setItem("pageColor", c);
+  localStorage.setItem("fontStyle", f);
   toast("Display settings saved!", "success");
 }
+/* ── USER account settings ── */
+function applyUserSettings() {
+  const c = document.getElementById("userPageColor").value;
+  const f = document.getElementById("userFontStyle").value;
+  const loc = document.getElementById("userLocation").value;
+  document.body.style.backgroundColor = c;
+  document.body.style.fontFamily = f;
+  localStorage.setItem("pageColor", c);
+  localStorage.setItem("fontStyle", f);
+  if (loc) localStorage.setItem("userLocation", loc);
+  closeModal();
+  toast("Settings saved!", "success");
+}
 
+/* ── Load saved prefs on every page load ── */
 window.addEventListener("DOMContentLoaded", () => {
   const savedColor = localStorage.getItem("pageColor");
   const savedFont = localStorage.getItem("fontStyle");
+  const savedLoc = localStorage.getItem("userLocation");
+
   if (savedColor) {
     document.body.style.backgroundColor = savedColor;
-    const c = document.getElementById("pageColor"); if (c) c.value = savedColor;
+    ["pageColor","userPageColor"].forEach(id => {
+      const el = document.getElementById(id); if (el) el.value = savedColor;
+    });
   }
   if (savedFont) {
     document.body.style.fontFamily = savedFont;
-    const f = document.getElementById("fontStyle"); if (f) f.value = savedFont;
+    ["fontStyle","userFontStyle"].forEach(id => {
+      const el = document.getElementById(id); if (el) el.value = savedFont;
+    });
+  }
+  if (savedLoc) {
+    const el = document.getElementById("userLocation"); if (el) el.value = savedLoc;
+    const home = document.getElementById("home-location"); if (home) home.value = savedLoc;
   }
 });
-</script> 
+</script>
 </body>
 </html>
