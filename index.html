@@ -618,7 +618,7 @@ button, input, select, textarea {
 </div>
 <nav id="nav">
   <div class="nav-logo" onclick="showScreen('home')">
-    <img src="IMG_6738.jpeg" alt="The Ingredient Check" style="height:80px;width:auto;">
+    <img src="IMG_6738.jpeg" alt="The Ingredient Check" style="height:64px;width:auto;">
   </div>
   </div>
   <div class="nav-links">
@@ -1298,8 +1298,8 @@ button, input, select, textarea {
             </div>
           </div>
 
-          <div class="portal-section-head">
-            <h3>Recent activity</h3>
+          <div class="portal-section-head" style="margin-bottom:1.5rem;">
+            <h3 style="font-weight:500;">Add or update a product</h3>
           </div>
           <div class="card">
             <div style="font-size:14px;color:var(--text2);line-height:2;">
@@ -1496,17 +1496,12 @@ button, input, select, textarea {
               <strong style="font-size:15px;">Garlic Knots</strong>
               <span class="pill pill-red">New</span>
             </div>
-            <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:10px;">
-              "I noticed your garlic knots now use a butter blend that contains dairy. The current IngredientCheck listing says no dairy ingredients, but the label I photographed at the restaurant shows butter (milk) listed. Uploading photo."
-            </p>
+              <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:10px;">A user reported that the garlic knots now use a butter blend containing dairy, but the listing still says no dairy ingredients. They attached a label photo showing butter (milk).</p>
             <div style="font-size:12px;color:var(--text3);margin-bottom:10px;">Reported by a verified user · June 17, 2026</div>
-            <div style="display:flex;gap:8px;">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
               <button class="btn btn-primary btn-sm" onclick="showPortalView('add-product');toast('Editing Garlic Knots listing…')">
-                <i class="fa-solid fa-pen"></i> Update listing
-              </button>
-              <button class="btn btn-sm" onclick="toast('Report flagged for moderator review.','success')">
-                <i class="fa-solid fa-flag"></i> Escalate to moderator
-              </button>
+              <button class="btn btn-primary btn-sm" onclick="showPortalView('add-product')"><i class="fa-solid fa-pen"></i> Update listing</button>
+              <button class="btn btn-sm" onclick="toast('Report escalated to moderator.','success')"><i class="fa-solid fa-flag"></i> Escalate to moderator</button>
               <button class="btn btn-sm btn-ghost" onclick="toast('Report marked as reviewed.')">Mark reviewed</button>
             </div>
           </div>
@@ -1516,9 +1511,7 @@ button, input, select, textarea {
               <strong style="font-size:15px;">BBQ Chicken Pizza</strong>
               <span class="pill pill-amber">In review</span>
             </div>
-            <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:10px;">
-              "The BBQ sauce used appears to contain high fructose corn syrup — the current listing does not mention this."
-            </p>
+              <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:10px;">A user reported the BBQ sauce appears to contain high fructose corn syrup, which isn't listed in the current ingredients.</p>
             <div style="font-size:12px;color:var(--text3);margin-bottom:10px;">Reported by a verified user · June 14, 2026</div>
             <div style="display:flex;gap:8px;">
               <button class="btn btn-primary btn-sm" onclick="showPortalView('add-product')">
