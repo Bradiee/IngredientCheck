@@ -1213,14 +1213,17 @@ button, input, select, textarea {
 
 <!-- ══════════════════════════════════════════════
      SCREEN: RETAILER PORTAL (post-login dashboard)
-  Only have the submitted by retailer on a product that actually got updated by that retailer
-  Make sure the updated fields are accurate - if a retailer didn’t enter it themselves provide a bolded easy to read warning
-  Make retailer windows noticeable that they are for the retailer after they login
 ══════════════════════════════════════════════ -->
 <div id="screen-retailer-portal" class="screen">
   <div class="portal-wrap">
     <!-- Sidebar -->
     <aside class="portal-sidebar">
+      <div style="background:rgba(125,211,188, 0.15);border;1px solid rgba(125, 211, 188, 0.3);border-radius:8px;padding:10px 12px;margin-bottom:1.25rem;">
+      <div style="font-size:11px;color:#7dd3bc;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Retailer Portal</div>
+      <div style="font-size:13px;color:#fff;font-weight:500;">Mellow Mushroom</div>
+      <div style="font-size:11px;color:#a0a8c8;">Sunset Hills, MO</div>
+  </div>
+      
       <div class="brand">
         <i class="fa-solid fa-leaf" style="color:#7dd3bc;"></i>
         Ingredient<span>Check</span> Portal
@@ -1255,8 +1258,11 @@ button, input, select, textarea {
       <div class="portal-topbar">
         <h2 id="portal-title">Dashboard</h2>
         <div class="portal-topbar-right">
-          <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified retailer</span>
-          <span>Mellow Mushroom — Sunset Hills</span>
+          <span style="background:#1a1a2e;color:#7dd3bc;font-size:12px;font-weight:600;padding:4px 12px;border-radius:99px;border:1px solid rgba(125,211,188,0.3);">
+            <i class="fa-solid fa-store:></i> Retailer View
+          </span>
+          <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+          <span style="font-size:13px;color:var(--text2);">Mellow Mushroom — Sunset Hills</span>
         </div>
       </div>
       <div class="portal-content">
@@ -1327,7 +1333,14 @@ button, input, select, textarea {
                 <tr>
                   <td><strong>Vegan Pizza</strong></td>
                   <td><span class="pill pill-gray">Restaurant item</span></td>
-                  <td><span class="pill pill-green"><i class="fa-solid fa-circle-check"></i> Live</span></td>
+                  <td><span class="pill pill-green"><i class="fa-solid fa-circle-check"></i> Retailer-verified</span>
+                  </td>
+
+                  <td>
+                    <span style="font-weight:700;color:var(--amber-dark);font-size:12px;">
+                      <i class="fa-solid fa-triangle-exclamation"></i> Not retailer-submitted - third-party data
+                    </span>
+                  <td>
                   <td>Jun 12, 2026</td>
                   <td>
                     <button class="btn btn-sm btn-ghost" onclick="showPortalView('add-product')"><i class="fa-solid fa-pen"></i> Edit</button>
@@ -1358,6 +1371,10 @@ button, input, select, textarea {
 
         <!-- VIEW: ADD / EDIT PRODUCT -->
         <div id="portal-view-add-product" class="portal-view">
+          <div style="background:var(--amber-light);border:1px solid var(--amber);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.25rem;font-size:13px;color:var(--amber-dark);display:flex;gap:10px;align-items:flex-start;">
+            <i class="fa-solid fa-triangle-exclamation" style="flex-shrink:0;margin-top:2px;"></i>
+            <span><strong>This product was not originally submitted by you.</strong> The current data comes from a third-party database. Once you save, your submission will replace it and display the <strong>Retailer-verified</strong> badge.</span>
+          </div>
           <div class="portal-section-head" style="margin-bottom:1.5rem;">
             <h3>Add or update a product</h3>
           </div>
