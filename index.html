@@ -819,7 +819,11 @@ button, input, select, textarea {
 </div>
 
 <!-- ══════════════════════════════════════════════
-     SCREEN: RESULTS
+     SCREEN: RESULTS / Browse
+  Not near St. Louis MO, Near location picked by user
+  Price: low first & Rating: high first needs to work
+  filters tab replaced with the e.g. "no peanuts", "vegan", "no gluten ingredients" search bar at top & location filter instead
+  When all button press activate Restaurants, Grocery, and Bakery. Make them work?
 ══════════════════════════════════════════════ -->
 <div id="screen-results" class="screen">
   <div class="results-header">
@@ -830,6 +834,7 @@ button, input, select, textarea {
     <button class="filter-tag active" onclick="toggleTag(this)">All</button>
     <button class="filter-tag" onclick="toggleTag(this)">Restaurants</button>
     <button class="filter-tag" onclick="toggleTag(this)">Grocery</button>
+    <button class="filter-tag" onclick="toggleTag(this)">Bakery</button>
     <button class="filter-tag" style="margin-left:auto;" onclick="toggleTag(this)">
       <i class="fa-solid fa-sliders"></i> Filters
     </button>
@@ -1164,7 +1169,10 @@ button, input, select, textarea {
       </div>
     </div>
 
-    <!-- Step 1: Email + password -->
+    <!-- Step 1: Email + password 
+    IN THE FUTURE ADD IN LOCKED ACCOUNTS UNTIL FULLY VERIFIED WHICH WILL INVOLVE A PROCESS [TALK TO ATTORNEY]
+    
+    -->
     <div id="retailer-step1">
       <div class="card" style="margin-bottom:1rem;">
         <div class="form-group">
@@ -1223,6 +1231,8 @@ button, input, select, textarea {
 
 <!-- ══════════════════════════════════════════════
      SCREEN: RETAILER PORTAL (post-login dashboard)
+  Edit icon not showing
+  
 ══════════════════════════════════════════════ -->
 <div id="screen-retailer-portal" class="screen">
   <div class="portal-wrap">
@@ -1369,7 +1379,11 @@ button, input, select, textarea {
           </div>
         </div>
 
-        <!-- VIEW: ADD / EDIT PRODUCT -->
+        <!-- VIEW: ADD / EDIT PRODUCT 
+        Needs added text box for ingredients not listed on the allergen declarations
+        Have it so editing it in the retailer portal replaces the third-party message
+      
+        -->
         <div id="portal-view-add-product" class="portal-view">
           <div style="background:var(--amber-light);border:1px solid var(--amber);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.25rem;font-size:13px;color:var(--amber-dark);display:flex;gap:10px;align-items:flex-start;">
             <i class="fa-solid fa-triangle-exclamation" style="flex-shrink:0;margin-top:2px;"></i>
@@ -1483,6 +1497,9 @@ button, input, select, textarea {
 
         <!-- VIEW: USER REPORTS 
         On help page, the report, support line, and email need a link
+        Make marked reviewed button clear the user-submitted ingredient report in the user reports
+        Have the esclatate to moderator button pop up a pop-up window allowing the retailer to state why they are escalating and prompting a nice message that their escalation will be responded to in 3-7 bussiness days
+ 
         -->
         <div id="portal-view-reports" class="portal-view">
           <div class="portal-section-head" style="margin-bottom:1rem;">
@@ -1520,7 +1537,10 @@ button, input, select, textarea {
           </div>
         </div>
 
-        <!-- VIEW: REVIEWS -->
+        <!-- VIEW: REVIEWS
+        Allow the retailer to edit their resonpses to customer reviews
+        
+        -->
         <div id="portal-view-reviews" class="portal-view">
           <div class="portal-section-head" style="margin-bottom:1rem;">
             <h3>Customer reviews</h3>
@@ -1552,7 +1572,13 @@ button, input, select, textarea {
           </div>
         </div>
 
-        <!-- VIEW: SETTINGS -->
+        <!-- VIEW: SETTINGS 
+        Make the color edit the sidebar color & have a preset option with saved options
+        The font style needs to be changed to something else...
+        
+        IN THE FUTURE IT WILL EDIT MORE COLOR
+        
+        -->
         <div id="portal-view-settings" class="portal-view">
           <div class="card" style="margin-top:1rem;">
             <h4 style="font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem;">Display preferences</h4>
