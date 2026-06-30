@@ -1175,8 +1175,8 @@ button, input, select, textarea {
     </div>
 
     <!-- Step 1: Email + password 
-    IN THE FUTURE ADD IN LOCKED ACCOUNTS UNTIL FULLY VERIFIED WHICH WILL INVOLVE A PROCESS [TALK TO ATTORNEY]
-    
+  IN THE FUTURE ADD IN LOCKED ACCOUNTS UNTIL FULLY VERIFIED WHICH WILL INVOLVE A PROCESS [TALK TO ATTORNEY]
+  
     -->
     <div id="retailer-step1">
       <div class="card" style="margin-bottom:1rem;">
@@ -1205,7 +1205,9 @@ button, input, select, textarea {
       </p>
     </div>
 
-    <!-- Step 2: OTP (shown after step 1) -->
+    <!-- Step 2: OTP (shown after step 1) 
+     Email Code work in future, also needs to be a verified email...figure out how to do this process
+    -->
     <div id="retailer-step2" class="hidden">
       <div class="card" style="text-align:center;margin-bottom:1rem;">
         <div style="font-size:32px;margin-bottom:10px;">📧</div>
@@ -1277,7 +1279,12 @@ button, input, select, textarea {
       </div>
     </aside>
 
-    <!-- Main area -->
+    <!-- Main area 
+    When retailer presses their name a new window opens up with their picture and retailer profile
+    The retailer profile will allow retailers to set up a page for users to view - They'll be able to review the company as a whole & retailers can reply directly to the comments...they will also show up in the reviews section colored differently to show the difference
+    Retailer View up top is not grabbing emoji
+    
+    -->
     <div class="portal-main">
       <div class="portal-topbar">
         <h2 id="portal-title">Dashboard</h2>
@@ -1334,7 +1341,11 @@ button, input, select, textarea {
           </div>
         </div>
 
-        <!-- VIEW: MY PRODUCTS -->
+        <!-- VIEW: MY PRODUCTS
+        Report pending not pulling emoji
+        make it to where you can change the date from least to most and vise versa
+        
+        -->
         <div id="portal-view-products" class="portal-view">
           <div class="portal-section-head">
             <h3>My listed products</h3>
@@ -1387,6 +1398,11 @@ button, input, select, textarea {
         <!-- VIEW: ADD / EDIT PRODUCT 
         Needs added text box for ingredients not listed on the allergen declarations
         Have it so editing it in the retailer portal replaces the third-party message
+        Categories need to be updated to include frozen food, dessert, fast food, 
+        Data source needs an other option and a text box will then pop up when pressed
+        Kitchen allergy safety status also needs an other option with a text box that comes up
+        Submit your review button should only work with all fields filled in
+        
       
         -->
         <div id="portal-view-add-product" class="portal-view">
@@ -1487,7 +1503,7 @@ button, input, select, textarea {
             <div style="background:var(--bg2);border-radius:var(--radius);padding:1rem;margin-bottom:1.25rem;font-size:13px;color:var(--text2);line-height:1.6;">
               <span style="display:block;margin-bottom:4px;color:var(--text1);">By submitting, you confirm that:</span>
               <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;"> The ingredient information I am submitting is accurate and up to date to the best of my knowledge.</label>
-              <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;"> I understand that IngredientCheck will display this data as-is and users rely on it for health decisions.</label>
+              <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;"> I understand that the Ingredient Check will display this data as-is and users rely on it for health decisions.</label>
               <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;"><input type="checkbox" style="margin-top:3px;"> I will notify IngredientCheck promptly if this information changes.</label>
             </div>
 
@@ -1543,7 +1559,9 @@ button, input, select, textarea {
         </div>
 
         <!-- VIEW: REVIEWS
-        Allow the retailer to edit their resonpses to customer reviews
+        Allow the retailer to edit their resonpses to customer reviews keeping the old comment attainable by pressing a version button
+        Respond as retailer needs to show the users name that wrote the review
+        
         
         -->
         <div id="portal-view-reviews" class="portal-view">
@@ -1582,7 +1600,7 @@ button, input, select, textarea {
         The font style needs to be changed to something else...
         Make this more like Profile settings where it opens up a new profile settings page You can edit your pfp username password the button colors like the new post and sign up
         
-        IN THE FUTURE IT WILL EDIT MORE COLOR
+        Page background color needs to change the sidebar + user end "home, browse, help, terms of service"
         
         -->
         <div id="portal-view-settings" class="portal-view">
@@ -1667,7 +1685,10 @@ button, input, select, textarea {
     <p style="text-align:center;font-size:13px;color:var(--text3);margin-top:10px;">No account? <a style="color:var(--green);cursor:pointer;" onclick="showModal('signup')">Sign up free</a></p>
   </div>
 
-  <!-- Signup modal -->
+  <!-- Signup modal 
+  Email verification needs to be added
+  
+  -->
   <div id="modal-signup" class="modal hidden">
     <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
     <h2>Create your account</h2>
@@ -1691,7 +1712,11 @@ button, input, select, textarea {
     <p style="text-align:center;font-size:12px;color:var(--text3);margin-top:8px;">By signing up you agree to the <a style="color:var(--green);cursor:pointer;" onclick="showModal('tos')">Terms of Service</a>.</p>
   </div>
 
-  <!-- Report modal -->
+  <!-- Report modal
+  Also needs the product + company under report an ingredient error
+
+  
+  -->
   <div id="modal-report" class="modal hidden">
     <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
     <h2>Report an ingredient error</h2>
@@ -1710,7 +1735,11 @@ button, input, select, textarea {
     </div>
   </div>
 
-  <!-- Review modal -->
+  <!-- Review modal 
+  Need to add in under Write a review the product and company name
+  Needs to have emojis + option to upload file/photos
+  
+  -->
   <div id="modal-review" class="modal hidden">
     <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
     <h2>Write a review</h2>
@@ -1741,7 +1770,11 @@ button, input, select, textarea {
     </div>
   </div>
 
-  <!-- Comment modal -->
+  <!-- Comment modal 
+  Needs to have the original post + user's name below Post a comment
+  Needs to have emojis + option to upload file/photos
+  
+  -->
   <div id="modal-comment" class="modal hidden">
     <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
     <h2>Post a comment</h2>
@@ -1843,7 +1876,12 @@ button, input, select, textarea {
     </div>
   </div>
 
-  <!-- Questionnaire modal -->
+  <!-- Questionnaire modal 
+  The are you looking for question needs to be expanded into bakery beverages
+  Max price per item needs different limits 
+  Results for "dairy-free" near St. Louis, MO this needs to go with the personalized search
+  
+  -->
   <div id="modal-questionnaire" class="modal hidden">
     <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
     <h2>Personalized search</h2>
