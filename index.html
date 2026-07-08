@@ -1069,81 +1069,197 @@ button, input, select, textarea {
   <div class="forum-wrap">
     <div class="forum-header">
       <h1>Community forum</h1>
-      <button class="btn btn-primary" onclick="showModal('new-post')">
-        <i class="fa-solid fa-plus"></i> New post
-      </button>
+      <button class="btn btn-primary" onclick="showModal('new-post')"><i class="fa-solid fa-plus"></i> New post</button>
     </div>
     <div class="forum-search-row">
-      <input class="form-control" type="text" placeholder="Search forum topics…">
-      <button class="btn">
-        <i class="fa-solid fa-magnifying-glass"></i> Search
-      </button>
+      <input class="form-control" id="forum-search" type="text" placeholder="Search forum topics…" onkeyup="filterForum()">
+      <button class="btn" onclick="filterForum()"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
     </div>
     <div class="forum-filters">
-      <button class="filter-tag active" onclick="toggleTag(this)">All topics</button>
-      <button class="filter-tag" onclick="toggleTag(this)">Recipes</button>
-      <button class="filter-tag" onclick="toggleTag(this)">Restaurant tips</button>
-      <button class="filter-tag" onclick="toggleTag(this)">Product finds</button>
-      <button class="filter-tag" onclick="toggleTag(this)">Questions</button>
+      <button class="filter-tag active" onclick="setForumTopic(this,'all')">All topics</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'recipes')">Recipes</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'tips')">Restaurant tips</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'finds')">Product finds</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'questions')">Questions</button>
     </div>
 
-    <div class="forum-post">
-      <div class="forum-post-title" onclick="toast('Thread view coming soon!')">
-        A lot of people think eggs are dairy — they are not! What are your favorite egg-free recipes?
-      </div>
-      <div class="forum-post-body">
-        Eggs and dairy come from different animals entirely. I keep seeing this confusion. Drop your best egg-free (and ideally dairy-free) recipes below — trying to expand my options!
-      </div>
+    <div class="forum-post" data-topic="questions" data-title="eggs dairy egg-free recipes">
+      <div class="forum-post-title" onclick="openThread(0)">A lot of people think eggs are dairy — they are not! What are your favorite egg-free recipes?</div>
+      <div class="forum-post-body">Eggs and dairy come from different animals entirely. Drop your best egg-free (and ideally dairy-free) recipes below — trying to expand my options!</div>
       <div class="forum-post-meta">
-        <span>Posted by <strong>Jordan M.</strong></span>
+        <span>Posted by <a onclick="showProfile('Jordan M.')" style="color:var(--green);cursor:pointer;">Jordan M.</a></span>
         <span>June 14, 2026</span>
-        <span><i class="fa-regular fa-comment"></i> 23 replies</span>
-        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> 47 likes</span>
+        <span onclick="openThread(0)" style="cursor:pointer;"><i class="fa-regular fa-comment"></i> <span id="reply-count-0">23</span> replies</span>
+        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> <span id="like-count-0">47</span> likes</span>
       </div>
       <div class="forum-actions">
-        <button class="forum-btn"><i class="fa-solid fa-heart"></i> Like</button>
-        <button class="forum-btn" onclick="showModal('comment')"><i class="fa-regular fa-comment"></i> Comment</button>
-        <button class="forum-btn"><i class="fa-solid fa-share-nodes"></i> Share</button>
+        <button class="forum-btn" onclick="likePost(0)"><i class="fa-solid fa-heart"></i> Like</button>
+        <button class="forum-btn" onclick="openThread(0)"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button class="forum-btn" onclick="sharePost(0)"><i class="fa-solid fa-share-nodes"></i> Share</button>
       </div>
     </div>
 
-    <div class="forum-post">
-      <div class="forum-post-title" onclick="toast('Thread view coming soon!')">
-        Favorite dairy-free pizza recipe — mine uses cashew cream!
-      </div>
-      <div class="forum-post-body">
-        I am allergic to dairy and this is my go-to: homemade dough, tomato sauce, cashew cream cheese, roasted garlic, spinach, and artichoke hearts. No cross-contamination worries when you make it yourself.
-      </div>
+    <div class="forum-post" data-topic="recipes" data-title="dairy-free pizza cashew cream recipe">
+      <div class="forum-post-title" onclick="openThread(1)">Favorite dairy-free pizza recipe — mine uses cashew cream!</div>
+      <div class="forum-post-body">I am allergic to dairy and this is my go-to: homemade dough, tomato sauce, cashew cream cheese, roasted garlic, spinach, and artichoke hearts.</div>
       <div class="forum-post-meta">
-        <span>Posted by <strong>Priya S.</strong></span>
+        <span>Posted by <a onclick="showProfile('Priya S.')" style="color:var(--green);cursor:pointer;">Priya S.</a></span>
         <span>June 8, 2026</span>
-        <span><i class="fa-regular fa-comment"></i> 11 replies</span>
-        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> 38 likes</span>
+        <span onclick="openThread(1)" style="cursor:pointer;"><i class="fa-regular fa-comment"></i> <span id="reply-count-1">11</span> replies</span>
+        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> <span id="like-count-1">38</span> likes</span>
       </div>
       <div class="forum-actions">
-        <button class="forum-btn"><i class="fa-solid fa-heart"></i> Like</button>
-        <button class="forum-btn" onclick="showModal('comment')"><i class="fa-regular fa-comment"></i> Comment</button>
-        <button class="forum-btn"><i class="fa-solid fa-share-nodes"></i> Share</button>
+        <button class="forum-btn" onclick="likePost(1)"><i class="fa-solid fa-heart"></i> Like</button>
+        <button class="forum-btn" onclick="openThread(1)"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button class="forum-btn" onclick="sharePost(1)"><i class="fa-solid fa-share-nodes"></i> Share</button>
       </div>
     </div>
 
-    <div class="forum-post">
-      <div class="forum-post-title" onclick="toast('Thread view coming soon!')">
-        Warning: Sunset Hills Mellow Mushroom changed their oil — check with them before ordering
-      </div>
-      <div class="forum-post-body">
-        Heads up to anyone with a soy allergy — I noticed they switched frying oils recently. The IngredientCheck listing may not reflect the most current info. Always ask the manager, which I did, and they confirmed the change. Report feature submitted!
-      </div>
+    <div class="forum-post" data-topic="tips" data-title="mellow mushroom oil change soy warning">
+      <div class="forum-post-title" onclick="openThread(2)">Warning: Sunset Hills Mellow Mushroom changed their oil — check before ordering</div>
+      <div class="forum-post-body">Heads up to anyone with a soy allergy — I noticed they switched frying oils recently. The listing may not reflect the most current info. Always ask the manager.</div>
       <div class="forum-post-meta">
-        <span>Posted by <strong>Alex T.</strong></span>
+        <span>Posted by <a onclick="showProfile('Alex T.')" style="color:var(--green);cursor:pointer;">Alex T.</a></span>
         <span>June 17, 2026</span>
-        <span><i class="fa-regular fa-comment"></i> 5 replies</span>
-        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> 62 likes</span>
+        <span onclick="openThread(2)" style="cursor:pointer;"><i class="fa-regular fa-comment"></i> <span id="reply-count-2">5</span> replies</span>
+        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> <span id="like-count-2">62</span> likes</span>
       </div>
       <div class="forum-actions">
-        <button class="forum-btn"><i class="fa-solid fa-heart"></i> Like</button>
-        <button class="forum-btn" onclick="showModal('comment')"><i class="fa-regular fa-comment"></i> Comment</button>
-        <button class="forum-btn"><i class="fa-solid fa-share-nodes"></i> Share</button>
+        <button class="forum-btn" onclick="likePost(2)"><i class="fa-solid fa-heart"></i> Like</button>
+        <button class="forum-btn" onclick="openThread(2)"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button class="forum-btn" onclick="sharePost(2)"><i class="fa-solid fa-share-nodes"></i> Share</button>
+      </div>
+    </div>
+  </div>
+</div><div id="screen-forum" class="screen">
+  <div class="forum-wrap">
+    <div class="forum-header">
+      <h1>Community forum</h1>
+      <button class="btn btn-primary" onclick="showModal('new-post')"><i class="fa-solid fa-plus"></i> New post</button>
+    </div>
+    <div class="forum-search-row">
+      <input class="form-control" id="forum-search" type="text" placeholder="Search forum topics…" onkeyup="filterForum()">
+      <button class="btn" onclick="filterForum()"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+    </div>
+    <div class="forum-filters">
+      <button class="filter-tag active" onclick="setForumTopic(this,'all')">All topics</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'recipes')">Recipes</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'tips')">Restaurant tips</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'finds')">Product finds</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'questions')">Questions</button>
+    </div>
+
+    <div class="forum-post" data-topic="questions" data-title="eggs dairy egg-free recipes">
+      <div class="forum-post-title" onclick="openThread(0)">A lot of people think eggs are dairy — they are not! What are your favorite egg-free recipes?</div>
+      <div class="forum-post-body">Eggs and dairy come from different animals entirely. Drop your best egg-free (and ideally dairy-free) recipes below — trying to expand my options!</div>
+      <div class="forum-post-meta">
+        <span>Posted by <a onclick="showProfile('Jordan M.')" style="color:var(--green);cursor:pointer;">Jordan M.</a></span>
+        <span>June 14, 2026</span>
+        <span onclick="openThread(0)" style="cursor:pointer;"><i class="fa-regular fa-comment"></i> <span id="reply-count-0">23</span> replies</span>
+        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> <span id="like-count-0">47</span> likes</span>
+      </div>
+      <div class="forum-actions">
+        <button class="forum-btn" onclick="likePost(0)"><i class="fa-solid fa-heart"></i> Like</button>
+        <button class="forum-btn" onclick="openThread(0)"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button class="forum-btn" onclick="sharePost(0)"><i class="fa-solid fa-share-nodes"></i> Share</button>
+      </div>
+    </div>
+
+    <div class="forum-post" data-topic="recipes" data-title="dairy-free pizza cashew cream recipe">
+      <div class="forum-post-title" onclick="openThread(1)">Favorite dairy-free pizza recipe — mine uses cashew cream!</div>
+      <div class="forum-post-body">I am allergic to dairy and this is my go-to: homemade dough, tomato sauce, cashew cream cheese, roasted garlic, spinach, and artichoke hearts.</div>
+      <div class="forum-post-meta">
+        <span>Posted by <a onclick="showProfile('Priya S.')" style="color:var(--green);cursor:pointer;">Priya S.</a></span>
+        <span>June 8, 2026</span>
+        <span onclick="openThread(1)" style="cursor:pointer;"><i class="fa-regular fa-comment"></i> <span id="reply-count-1">11</span> replies</span>
+        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> <span id="like-count-1">38</span> likes</span>
+      </div>
+      <div class="forum-actions">
+        <button class="forum-btn" onclick="likePost(1)"><i class="fa-solid fa-heart"></i> Like</button>
+        <button class="forum-btn" onclick="openThread(1)"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button class="forum-btn" onclick="sharePost(1)"><i class="fa-solid fa-share-nodes"></i> Share</button>
+      </div>
+    </div>
+
+    <div class="forum-post" data-topic="tips" data-title="mellow mushroom oil change soy warning">
+      <div class="forum-post-title" onclick="openThread(2)">Warning: Sunset Hills Mellow Mushroom changed their oil — check before ordering</div>
+      <div class="forum-post-body">Heads up to anyone with a soy allergy — I noticed they switched frying oils recently. The listing may not reflect the most current info. Always ask the manager.</div>
+      <div class="forum-post-meta">
+        <span>Posted by <a onclick="showProfile('Alex T.')" style="color:var(--green);cursor:pointer;">Alex T.</a></span>
+        <span>June 17, 2026</span>
+        <span onclick="openThread(2)" style="cursor:pointer;"><i class="fa-regular fa-comment"></i> <span id="reply-count-2">5</span> replies</span>
+        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> <span id="like-count-2">62</span> likes</span>
+      </div>
+      <div class="forum-actions">
+        <button class="forum-btn" onclick="likePost(2)"><i class="fa-solid fa-heart"></i> Like</button>
+        <button class="forum-btn" onclick="openThread(2)"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button class="forum-btn" onclick="sharePost(2)"><i class="fa-solid fa-share-nodes"></i> Share</button>
+      </div>
+    </div>
+  </div>
+</div><div id="screen-forum" class="screen">
+  <div class="forum-wrap">
+    <div class="forum-header">
+      <h1>Community forum</h1>
+      <button class="btn btn-primary" onclick="showModal('new-post')"><i class="fa-solid fa-plus"></i> New post</button>
+    </div>
+    <div class="forum-search-row">
+      <input class="form-control" id="forum-search" type="text" placeholder="Search forum topics…" onkeyup="filterForum()">
+      <button class="btn" onclick="filterForum()"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+    </div>
+    <div class="forum-filters">
+      <button class="filter-tag active" onclick="setForumTopic(this,'all')">All topics</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'recipes')">Recipes</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'tips')">Restaurant tips</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'finds')">Product finds</button>
+      <button class="filter-tag" onclick="setForumTopic(this,'questions')">Questions</button>
+    </div>
+
+    <div class="forum-post" data-topic="questions" data-title="eggs dairy egg-free recipes">
+      <div class="forum-post-title" onclick="openThread(0)">A lot of people think eggs are dairy — they are not! What are your favorite egg-free recipes?</div>
+      <div class="forum-post-body">Eggs and dairy come from different animals entirely. Drop your best egg-free (and ideally dairy-free) recipes below — trying to expand my options!</div>
+      <div class="forum-post-meta">
+        <span>Posted by <a onclick="showProfile('Jordan M.')" style="color:var(--green);cursor:pointer;">Jordan M.</a></span>
+        <span>June 14, 2026</span>
+        <span onclick="openThread(0)" style="cursor:pointer;"><i class="fa-regular fa-comment"></i> <span id="reply-count-0">23</span> replies</span>
+        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> <span id="like-count-0">47</span> likes</span>
+      </div>
+      <div class="forum-actions">
+        <button class="forum-btn" onclick="likePost(0)"><i class="fa-solid fa-heart"></i> Like</button>
+        <button class="forum-btn" onclick="openThread(0)"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button class="forum-btn" onclick="sharePost(0)"><i class="fa-solid fa-share-nodes"></i> Share</button>
+      </div>
+    </div>
+
+    <div class="forum-post" data-topic="recipes" data-title="dairy-free pizza cashew cream recipe">
+      <div class="forum-post-title" onclick="openThread(1)">Favorite dairy-free pizza recipe — mine uses cashew cream!</div>
+      <div class="forum-post-body">I am allergic to dairy and this is my go-to: homemade dough, tomato sauce, cashew cream cheese, roasted garlic, spinach, and artichoke hearts.</div>
+      <div class="forum-post-meta">
+        <span>Posted by <a onclick="showProfile('Priya S.')" style="color:var(--green);cursor:pointer;">Priya S.</a></span>
+        <span>June 8, 2026</span>
+        <span onclick="openThread(1)" style="cursor:pointer;"><i class="fa-regular fa-comment"></i> <span id="reply-count-1">11</span> replies</span>
+        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> <span id="like-count-1">38</span> likes</span>
+      </div>
+      <div class="forum-actions">
+        <button class="forum-btn" onclick="likePost(1)"><i class="fa-solid fa-heart"></i> Like</button>
+        <button class="forum-btn" onclick="openThread(1)"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button class="forum-btn" onclick="sharePost(1)"><i class="fa-solid fa-share-nodes"></i> Share</button>
+      </div>
+    </div>
+
+    <div class="forum-post" data-topic="tips" data-title="mellow mushroom oil change soy warning">
+      <div class="forum-post-title" onclick="openThread(2)">Warning: Sunset Hills Mellow Mushroom changed their oil — check before ordering</div>
+      <div class="forum-post-body">Heads up to anyone with a soy allergy — I noticed they switched frying oils recently. The listing may not reflect the most current info. Always ask the manager.</div>
+      <div class="forum-post-meta">
+        <span>Posted by <a onclick="showProfile('Alex T.')" style="color:var(--green);cursor:pointer;">Alex T.</a></span>
+        <span>June 17, 2026</span>
+        <span onclick="openThread(2)" style="cursor:pointer;"><i class="fa-regular fa-comment"></i> <span id="reply-count-2">5</span> replies</span>
+        <span><i class="fa-solid fa-heart" style="color:#D4537E"></i> <span id="like-count-2">62</span> likes</span>
+      </div>
+      <div class="forum-actions">
+        <button class="forum-btn" onclick="likePost(2)"><i class="fa-solid fa-heart"></i> Like</button>
+        <button class="forum-btn" onclick="openThread(2)"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button class="forum-btn" onclick="sharePost(2)"><i class="fa-solid fa-share-nodes"></i> Share</button>
       </div>
     </div>
   </div>
@@ -1816,7 +1932,20 @@ button, input, select, textarea {
       <button class="btn btn-primary" onclick="closeModal();toast('Post published!','success')">Publish post</button>
     </div>
   </div>
-
+  <!--Forum Modal -->
+  <div id="modal-thread" class="modal hidden" style="max-width:560px;">
+    <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    <h2 id="thread-title" style="font-size:16px;"></h2>
+    <p id="thread-body" style="color:var(--text2);"></p>
+    <hr class="modal-divider">
+    <div id="thread-replies" style="max-height:280px;overflow-y:auto;"></div>
+    <div class="form-group" style="margin-top:1rem;margin-bottom:0;">
+      <textarea class="form-control" id="thread-comment" rows="3" placeholder="Add your comment…"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="postThreadComment()"><i class="fa-solid fa-paper-plane"></i> Post comment</button>
+    </div>
+  </div>
   <!-- Reply to review (retailer) -->
   <div id="modal-reply-review" class="modal hidden">
     <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -2150,7 +2279,72 @@ function toast(msg, type) {
   c.appendChild(t);
   setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; setTimeout(() => t.remove(), 300); }, 3500);
 }
+/* ── FORUM ── */
+const forumData = [
+  { title:"Egg-free recipes thread", body:"Eggs and dairy come from different animals entirely. Drop your best egg-free recipes!", replies:[{who:"Priya S.",text:"Chickpea flour omelettes are amazing!"},{who:"Sam R.",text:"Flax eggs work great for baking."}] },
+  { title:"Dairy-free pizza — cashew cream", body:"My go-to: homemade dough, cashew cream cheese, roasted garlic, spinach.", replies:[{who:"Alex T.",text:"Making this tonight, thanks!"}] },
+  { title:"Mellow Mushroom oil change warning", body:"They switched frying oils recently. Always ask the manager.", replies:[] }
+];
+let likedPosts = {};
 
+function setForumTopic(btn, topic) {
+  document.querySelectorAll('.forum-filters .filter-tag').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.forum-post').forEach(p => {
+    p.style.display = (topic === 'all' || p.dataset.topic === topic) ? '' : 'none';
+  });
+}
+function filterForum() {
+  const q = document.getElementById('forum-search').value.toLowerCase();
+  document.querySelectorAll('.forum-post').forEach(p => {
+    const match = (p.dataset.title + ' ' + p.textContent).toLowerCase().includes(q);
+    p.style.display = match ? '' : 'none';
+  });
+}
+function likePost(i) {
+  const el = document.getElementById('like-count-' + i);
+  if (likedPosts[i]) { el.textContent = +el.textContent - 1; likedPosts[i] = false; }
+  else { el.textContent = +el.textContent + 1; likedPosts[i] = true; }
+}
+function sharePost(i) {
+  const link = "https://theingredientcheck.com/#forum-post-" + i;
+  navigator.clipboard?.writeText(link);
+  toast('Link copied to clipboard!', 'success');
+}
+function showProfile(name) {
+  toast('Profile for ' + name + ' — coming soon!');
+}
+let currentThread = 0;
+function openThread(i) {
+  currentThread = i;
+  const d = forumData[i];
+  document.getElementById('thread-title').textContent = d.title;
+  document.getElementById('thread-body').textContent = d.body;
+  renderReplies();
+  showModal('thread');
+}
+function renderReplies() {
+  const box = document.getElementById('thread-replies');
+  const d = forumData[currentThread];
+  if (d.replies.length === 0) {
+    box.innerHTML = '<p style="color:var(--text3);font-size:14px;">No replies yet. Be the first to comment!</p>';
+  } else {
+    box.innerHTML = d.replies.map(r =>
+      `<div style="padding:8px 0;border-bottom:1px solid var(--border);"><strong style="font-size:13px;">${r.who}</strong><div style="font-size:14px;color:var(--text2);">${r.text}</div></div>`
+    ).join('');
+  }
+}
+function postThreadComment() {
+  const t = document.getElementById('thread-comment');
+  const text = t.value.trim();
+  if (!text) { toast('Please write a comment first.', 'error'); return; }
+  forumData[currentThread].replies.push({ who:"You", text });
+  document.getElementById('reply-count-' + currentThread).textContent =
+    +document.getElementById('reply-count-' + currentThread).textContent + 1;
+  t.value = '';
+  renderReplies();
+  toast('Comment posted!', 'success');
+}
 // Init
 showScreen('home');
 </script>
