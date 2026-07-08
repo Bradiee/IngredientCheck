@@ -2321,5 +2321,18 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<footer class="site-footer">
+  <a onclick="showScreen('home')">Home</a>
+  <a onclick="showScreen('results')">Browse</a>
+  <a onclick="showScreen('forum')">Forum</a>
+  <a onclick="showModal('help')">Help</a>
+  <a onclick="showModal('tos')">Terms of Service</a>
+  <span style="color:#666;">© 2026 The Ingredient Check</span>
+</footer>
+  
 </body>
 </html>
