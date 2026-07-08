@@ -104,7 +104,7 @@ button, input, select, textarea {
 }
 
 /* ── BUTTONS 
-  On help page, the report, support line, and email need a link
+ 
   ──────────────────────────────────── */
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
@@ -622,6 +622,38 @@ button, input, select, textarea {
   border-color: #D4537E;
 }
 .forum-btn.liked i { color: #D4537E; }
+#back-to-top {
+  position: fixed; bottom: 24px; left: 24px; z-index: 998;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  border: none; cursor: pointer; font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  display: none; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+#back-to-top:hover { background: var(--green-dark); }
+#back-to-top.visible { display: flex; }
+#back-to-top {
+  position: fixed; bottom: 24px; left: 24px; z-index: 998;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  border: none; cursor: pointer; font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  display: none; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+#back-to-top:hover { background: var(--green-dark); }
+#back-to-top.visible { display: flex; }
+
+/* ── SITE FOOTER ── */
+.site-footer {
+  background: #1a1a2e; color: #c0c4d8;
+  padding: 2rem; margin-top: 3rem;
+  display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+  font-size: 13px;
+}
+.site-footer a { color: #7dd3bc; cursor: pointer; }
+.site-footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -2061,7 +2093,14 @@ function doSearch() {
 }
 
 /* ── FILTER TAGS ───────────────────────────── */
-function toggleTag(el) { el.classList.toggle('active'); }
+function toggleTag(el) {
+  el.classList.toggle('active');
+  const search = document.getElementById('home-search');
+  if (!search) return;
+  const active = Array.from(document.querySelectorAll('.search-filters .filter-tag.active'))
+    .map(b => b.textContent.trim());
+  search.value = active.join(', ');
+}
 
 /* ── AUTH (demo) ────────────────────────────── */
 function fakeLogin() {
@@ -2227,6 +2266,9 @@ function postThreadComment() {
   renderReplies();
   toast('Comment posted!', 'success');
 }
+window.addEventListener('scroll', () => {
+  document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 300);
+});
 // Init
 showScreen('home');
 </script>
