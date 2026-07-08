@@ -644,7 +644,9 @@ button, input, select, textarea {
 }
 #back-to-top:hover { background: var(--green-dark); }
 #back-to-top.visible { display: flex; }
-
+<button id="go-back" onclick="history.back()" title="Go back">
+  <i class="fa-solid fa-arrow-left"></i>
+</button>
 /* ── SITE FOOTER ── */
 .site-footer {
   background: #1a1a2e; color: #c0c4d8;
@@ -654,6 +656,16 @@ button, input, select, textarea {
 }
 .site-footer a { color: #7dd3bc; cursor: pointer; }
 .site-footer a:hover { text-decoration: underline; }
+#go-back {
+  position: fixed; bottom: 24px; left: 78px; z-index: 998;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: #fff; color: var(--text2);
+  border: 1px solid var(--border2); cursor: pointer; font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+#go-back:hover { background: var(--bg2); }
 </style>
 </head>
 <body>
@@ -676,6 +688,11 @@ button, input, select, textarea {
     <a onclick="showScreen('forum')" id="nav-forum">Forum</a>
     <a onclick="showModal('help')">Help</a>
     <a onclick="showModal('tos')">Terms of Service</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);cursor:pointer;" onclick="changeLocation()">
+    <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+    <span id="global-location">St. Louis, MO</span>
+    <i class="fa-solid fa-pen" style="font-size:10px;color:var(--text3);"></i>
   </div>
   <div class="nav-actions">
     <div id="nav-user-badge">
@@ -1004,7 +1021,7 @@ button, input, select, textarea {
     <!-- Persistent reminder (always shown) -->
     <div class="reminder-box">
       <h3><i class="fa-solid fa-circle-exclamation"></i> Before you eat — please read</h3>
-      <p>This data was reported by Mellow Mushroom to IngredientCheck and reflects what they submitted. Recipes and formulas can change without notice. <strong>IngredientCheck is an information tool, not a medical guarantee.</strong> Always read the physical label and speak with the establishment manager before consuming if you have a serious allergy.</p>
+      <p id="reminder-text">This data was reported by Mellow Mushroom to IngredientCheck. Recipes and formulas can change without notice. IngredientCheck is an information tool, not a medical guarantee. Always read the physical label and speak with the establishment manager before consuming if you have a serious allergy.</p>
       <label><input type="checkbox"> I understand this is an information tool only and I consume at my own risk</label>
     </div>
 
@@ -2269,6 +2286,42 @@ function postThreadComment() {
 window.addEventListener('scroll', () => {
   document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 300);
 });
+function collapseReminder(cb) {
+  const box = cb.closest('.reminder-box');
+  const text = document.getElementById('reminder-text');
+  if (cb.checked) {
+    text.style.display = 'none';
+    box.style.padding = '0.75rem 1.25rem';
+    box.querySelector('h3').style.marginBottom = '0';
+  } else {
+    text.style.display = '';
+    box.style.padding = '';
+    box.querySelector('h3').style.marginBottom = '';
+  }
+}
+  function changeLocation() {
+  const current = localStorage.getItem('userLocation') || 'St. Louis, MO';
+  const loc = prompt('Enter your city or zip code:', current);
+  if (loc && loc.trim()) {
+    const clean = loc.trim();
+    localStorage.setItem('userLocation', clean);
+    updateLocationDisplays(clean);
+    toast('Location updated to ' + clean, 'success');
+  }
+}
+
+function updateLocationDisplays(loc) {
+  ['global-location'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.textContent = loc;
+  });
+  ['home-location','userLocation','map-location-input'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = loc;
+  });
+}
+
+// Load saved location on page load
+const savedLoc = localStorage.getItem('userLocation');
+if (savedLoc) updateLocationDisplays(savedLoc);
 // Init
 showScreen('home');
 </script>
