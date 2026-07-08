@@ -523,34 +523,6 @@ button, input, select, textarea {
   display: flex; align-items: center; gap: 10px;
   margin-bottom: 1.25rem;
 }
-/* ════════════════════════════════════════════════
-   SCREEN: FORUM
-════════════════════════════════════════════════ */
-.forum-wrap { max-width: 820px; margin: 0 auto; padding: 1.5rem 2rem 3rem; }
-.forum-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-.forum-header h1 { font-size: 22px; font-weight: 600; }
-.forum-search-row { display: flex; gap: 8px; margin-bottom: 1.25rem; }
-.forum-search-row input { flex: 1; }
-.forum-filters { display: flex; gap: 7px; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.forum-post { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 10px; }
-.forum-post-title { font-size: 15px; font-weight: 600; margin-bottom: 5px; cursor: pointer; }
-.forum-post-title:hover { color: var(--green); }
-.forum-post-body { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
-.forum-post-meta { font-size: 12px; color: var(--text3); display: flex; gap: 12px; align-items: center; }
-.forum-actions { display: flex; gap: 8px; margin-top: 10px; }
-.forum-btn {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 13px; color: var(--text2); background: var(--bg2);
-  border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 5px 12px; cursor: pointer;
-}
-.forum-btn:hover { background: var(--green-light); color: var(--green-dark); }
-.forum-btn.liked {
-  background: #fde8ef;
-  color: #D4537E;
-  border-color: #D4537E;
-}
-.forum-btn.liked i { color: #D4537E; }
   
 /* ════════════════════════════════════════════════
    MODAL SYSTEM
@@ -618,6 +590,19 @@ button, input, select, textarea {
   .form-row { flex-direction: column; }
   .retailer-steps { display: none; }
 }
+  .forum-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 13px; color: var(--text2); background: var(--bg2);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 5px 12px; cursor: pointer;
+}
+.forum-btn:hover { background: var(--green-light); color: var(--green-dark); }
+.forum-btn.liked {
+  background: #fde8ef;
+  color: #D4537E;
+  border-color: #D4537E;
+}
+.forum-btn.liked i { color: #D4537E; }
 </style>
 </head>
 <body>
@@ -1131,7 +1116,8 @@ button, input, select, textarea {
       </div>
     </div>
   </div>
-
+</div>
+  
 <!-- ══════════════════════════════════════════════
      SCREEN: RETAILER LOGIN
 ══════════════════════════════════════════════ -->
