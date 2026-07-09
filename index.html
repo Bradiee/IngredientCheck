@@ -695,16 +695,18 @@ button, input, select, textarea {
     <a onclick="showScreen('home')" id="nav-home">Home</a>
     <a onclick="showScreen('results')" id="nav-browse">Browse</a>
     <a onclick="showScreen('forum')" id="nav-forum">Forum</a>
-    <a onclick="showModal('user-settings')">Settings</a>
     <a onclick="showModal('help')">Help</a>
     <a onclick="showModal('tos')">Terms of Service</a>
   </div>
 
   <div class="nav-actions">
-    <div id="nav-user-badge">
-      Signed in as <span id="nav-username">User</span>
-      <button class="btn btn-sm btn-ghost" onclick="logout()">Sign out</button>
-    </div>
+  <div id="nav-user-badge">
+    Signed in as <span id="nav-username">User</span>
+    <button class="btn btn-sm btn-ghost" onclick="showModal('user-settings')" title="Settings" style="padding:6px 9px;">
+      <i class="fa-solid fa-gear"></i>
+    </button>
+    <button class="btn btn-sm btn-ghost" onclick="logout()">Sign out</button>
+  </div>
     <div id="nav-auth-btns">
       <button class="btn btn-sm btn-ghost" onclick="showModal('login')">Log in</button>
       <button class="btn btn-sm btn-primary" onclick="showModal('signup')">Sign up</button>
