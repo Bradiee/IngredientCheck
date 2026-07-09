@@ -666,6 +666,14 @@ button, input, select, textarea {
   transition: background 0.15s;
 }
 #go-back:hover { background: var(--bg2); }
+.site-footer {
+  background: #1a1a2e; color: #c0c4d8;
+  padding: 2rem; margin-top: 3rem;
+  display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+  font-size: 13px;
+}
+.site-footer a { color: #7dd3bc; cursor: pointer; }
+.site-footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -680,33 +688,22 @@ button, input, select, textarea {
 </div>
 <nav id="nav">
   <div class="nav-logo" onclick="showScreen('home')" style="overflow:hidden;height:100px;display:flex;align-items:center;">
-  <img src="Logo.jpeg" alt="The Ingredient Check" style="height:60px;width:auto;margin:-30px 0 -40px 0;">
+    <img src="Logo.jpeg" alt="The Ingredient Check" style="height:60px;width:auto;margin:-30px 0 -40px 0;">
   </div>
+
   <div class="nav-links">
     <a onclick="showScreen('home')" id="nav-home">Home</a>
     <a onclick="showScreen('results')" id="nav-browse">Browse</a>
     <a onclick="showScreen('forum')" id="nav-forum">Forum</a>
+    <a onclick="showModal('user-settings')">Settings</a>
     <a onclick="showModal('help')">Help</a>
     <a onclick="showModal('tos')">Terms of Service</a>
   </div>
+
   <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);cursor:pointer;" onclick="changeLocation()">
     <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
     <span id="global-location">St. Louis, MO</span>
     <i class="fa-solid fa-pen" style="font-size:10px;color:var(--text3);"></i>
-  </div>
-  <div class="nav-actions">
-    <div id="nav-user-badge">
-      Signed in as <span id="nav-username">User</span>
-      <a onclick="showModal('user-settings')">Settings</a>
-      <button class="btn btn-sm btn-ghost" onclick="logout()">Sign out</button>
-    </div>
-    <div id="nav-auth-btns">
-      <button class="btn btn-sm btn-ghost" onclick="showModal('login')">Log in</button>
-      <button class="btn btn-sm btn-primary" onclick="showModal('signup')">Sign up</button>
-      <button class="btn btn-sm btn-retailer" onclick="showScreen('retailer-login')">
-        <i class="fa-solid fa-store"></i> Retailer login
-      </button>
-    </div>
   </div>
 </nav>
 
