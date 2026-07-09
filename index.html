@@ -674,6 +674,13 @@ button, input, select, textarea {
 }
 .site-footer a { color: #7dd3bc; cursor: pointer; }
 .site-footer a:hover { text-decoration: underline; }
+.feature-cat {
+  display: inline-block;
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text3);
+  margin-bottom: 8px;
+}
 </style>
 </head>
 <body>
@@ -761,32 +768,43 @@ button, input, select, textarea {
 
   <!-- Feature tiles -->
   <div class="feature-grid">
-    <div class="feature-card" onclick="showScreen('results')">
-      <div class="feature-icon" style="color:var(--green)"><i class="fa-solid fa-utensils"></i></div>
-      <h3>Restaurant search</h3>
-      <p>Find allergen-friendly dishes near you</p>
-    </div>
-    <div class="feature-card" onclick="showScreen('results')">
-      <div class="feature-icon" style="color:var(--blue)"><i class="fa-solid fa-basket-shopping"></i></div>
-      <h3>Grocery products</h3>
-      <p>Search packaged food by ingredient</p>
-    </div>
-    <div class="feature-card" onclick="showScreen('results')">
-      <div class="feature-icon" style="color:var(--amber-dark)"><i class="fa-solid fa-fire-flame-curved"></i></div>
-      <h3>What's popular</h3>
-      <p>Top-rated picks near your location</p>
-    </div>
-    <div class="feature-card" onclick="showScreen('forum')">
-      <div class="feature-icon" style="color:#D4537E"><i class="fa-solid fa-comments"></i></div>
-      <h3>Community forum</h3>
-      <p>Talk recipes, tips, and discoveries</p>
-    </div>
-    <div class="feature-card" onclick="showModal('questionnaire')">
-      <div class="feature-icon" style="color:#7F77DD"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-      <h3>Personalized search</h3>
-      <p>Answer a few questions, get tailored results</p>
-    </div>
+  <div class="feature-card" onclick="showScreen('results')">
+    <span class="feature-cat">Search</span>
+    <div class="feature-icon" style="color:var(--green)"><i class="fa-solid fa-utensils"></i></div>
+    <h3>Restaurant search</h3>
+    <p>Find allergen-friendly dishes near you</p>
   </div>
+  <div class="feature-card" onclick="showScreen('results')">
+    <span class="feature-cat">Search</span>
+    <div class="feature-icon" style="color:var(--blue)"><i class="fa-solid fa-basket-shopping"></i></div>
+    <h3>Grocery products</h3>
+    <p>Search packaged food by ingredient</p>
+  </div>
+  <div class="feature-card" onclick="showScreen('results')">
+    <span class="feature-cat">Discover</span>
+    <div class="feature-icon" style="color:var(--amber-dark)"><i class="fa-solid fa-fire-flame-curved"></i></div>
+    <h3>What's popular</h3>
+    <p>Top-rated picks near your location</p>
+  </div>
+  <div class="feature-card" onclick="showScreen('forum')">
+    <span class="feature-cat">Community</span>
+    <div class="feature-icon" style="color:#D4537E"><i class="fa-solid fa-comments"></i></div>
+    <h3>Community forum</h3>
+    <p>Talk recipes, tips, and discoveries</p>
+  </div>
+  <div class="feature-card" onclick="showModal('questionnaire')">
+    <span class="feature-cat">Personalize</span>
+    <div class="feature-icon" style="color:#7F77DD"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+    <h3>Personalized search</h3>
+    <p>Answer a few questions, get tailored results</p>
+  </div>
+  <div class="feature-card" onclick="showScreen('map')">
+    <span class="feature-cat">Explore</span>
+    <div class="feature-icon" style="color:var(--green)"><i class="fa-solid fa-map-location-dot"></i></div>
+    <h3>Map view</h3>
+    <p>Pinpoint any location to search that area</p>
+  </div>
+</div>
 
   <!-- Popular near you -->
   <div class="home-section">
@@ -908,7 +926,7 @@ button, input, select, textarea {
   </div>
   <div class="results-list">
 
-    <div class="result-card" onclick="showScreen('detail')">
+    <div class="result-card" data-type="restaurants" data-tags="no dairy vegan wheat pizza" onclick="showScreen('detail')">
       <div class="result-icon">🍕</div>
       <div class="result-body">
         <div class="result-name">Mellow Mushroom — Vegan Pizza</div>
@@ -929,7 +947,7 @@ button, input, select, textarea {
       </div>
     </div>
 
-    <div class="result-card" onclick="showScreen('detail')">
+    <div class="result-card" data-type="restaurants" data-tags="vegan no dairy no eggs tacos" onclick="showScreen('detail')">
       <div class="result-icon">🌮</div>
       <div class="result-body">
         <div class="result-name">Terror Tacos — Full Menu</div>
@@ -950,7 +968,7 @@ button, input, select, textarea {
       </div>
     </div>
 
-    <div class="result-card" onclick="showScreen('detail')">
+    <div class="result-card" data-type="grocery" data-tags="no dairy no soy oat milk gluten" onclick="showScreen('detail')">
       <div class="result-icon">🥛</div>
       <div class="result-body">
         <div class="result-name">Oatly Oat Milk — Original</div>
@@ -971,7 +989,7 @@ button, input, select, textarea {
       </div>
     </div>
 
-    <div class="result-card" onclick="showScreen('detail')">
+    <div class="result-card" data-type="grocery" data-tags="no dairy tree nuts coconut ice cream" onclick="showScreen('detail')">
       <div class="result-icon">🍦</div>
       <div class="result-body">
         <div class="result-name">So Delicious Coconut Milk Ice Cream</div>
@@ -991,7 +1009,7 @@ button, input, select, textarea {
       </div>
     </div>
 
-    <div class="result-card" onclick="showScreen('detail')">
+    <div class="result-card" data-type="grocery" data-tags="no dairy no soy eggs tree nuts bar" onclick="showScreen('detail')">
       <div class="result-icon">🥜</div>
       <div class="result-body">
         <div class="result-name">RXBAR Chocolate Sea Salt</div>
@@ -1975,7 +1993,7 @@ button, input, select, textarea {
     </div>
     <div class="modal-footer">
       <button class="btn" onclick="closeModal()">Skip</button>
-      <button class="btn btn-primary" onclick="closeModal();doSearch()">Find my results</button>
+      <button class="btn btn-primary" onclick="runPersonalizedSearch()">Find my results</button>
     </div>
   </div>
 
@@ -2109,11 +2127,53 @@ function closeModal(e) {
 }
 
 /* ── SEARCH ────────────────────────────────── */
+function levenshtein(a, b) {
+  const m = [];
+  for (let i = 0; i <= b.length; i++) m[i] = [i];
+  for (let j = 0; j <= a.length; j++) m[0][j] = j;
+  for (let i = 1; i <= b.length; i++)
+    for (let j = 1; j <= a.length; j++)
+      m[i][j] = b[i-1] === a[j-1] ? m[i-1][j-1]
+        : Math.min(m[i-1][j-1] + 1, m[i][j-1] + 1, m[i-1][j] + 1);
+  return m[b.length][a.length];
+}
+
+function fuzzyMatch(needle, haystack) {
+  needle = needle.toLowerCase().trim();
+  haystack = haystack.toLowerCase();
+  if (!needle) return true;
+  if (haystack.includes(needle)) return true;
+  // Check each word in haystack against needle with tolerance
+  return haystack.split(/\s+/).some(word => {
+    if (word.length < 3) return false;
+    const tolerance = needle.length <= 4 ? 1 : 2;
+    return levenshtein(needle, word) <= tolerance;
+  });
+}
+
+/* ── SEARCH WITH FUZZY + FILTERING ── */
 function doSearch() {
-  const q = document.getElementById('home-search')?.value || 'dairy-free';
+  const q = document.getElementById('home-search')?.value.trim() || '';
   const el = document.getElementById('results-query');
-  if (el) el.textContent = q || 'dairy-free';
+  if (el) el.textContent = q || 'all results';
   showScreen('results');
+  applySearchFilter(q);
+}
+
+function applySearchFilter(query) {
+  const terms = query.toLowerCase().split(',').map(t => t.trim()).filter(Boolean);
+  const cards = document.querySelectorAll('#results-list .result-card');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const haystack = (card.dataset.tags || '') + ' ' + card.textContent;
+    const match = terms.length === 0 || terms.every(t => fuzzyMatch(t, haystack));
+    card.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+
+  const header = document.querySelector('.results-header p');
+  if (header) header.textContent = `${visible} result${visible === 1 ? '' : 's'} found — sorted by rating`;
 }
 
 /* ── FILTER TAGS ───────────────────────────── */
@@ -2347,7 +2407,20 @@ function updateLocationDisplays(loc) {
     const el = document.getElementById(id); if (el) el.value = loc;
   });
 }
+function runPersonalizedSearch() {
+  const checked = Array.from(
+    document.querySelectorAll('#modal-questionnaire input[type="checkbox"]:checked')
+  ).map(cb => 'no ' + cb.parentElement.textContent.trim().toLowerCase());
 
+  const query = checked.join(', ');
+  const search = document.getElementById('home-search');
+  if (search) search.value = query;
+
+  closeModal();
+  document.getElementById('results-query').textContent = query || 'your preferences';
+  showScreen('results');
+  applySearchFilter(query);
+}
 // Load saved location on page load
 const savedLoc = localStorage.getItem('userLocation');
 if (savedLoc) updateLocationDisplays(savedLoc);
