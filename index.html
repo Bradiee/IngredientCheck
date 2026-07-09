@@ -739,7 +739,7 @@ button, input, select, textarea {
 
     <div class="search-box">
       <div class="search-location-row">
-        <input type="text" placeholder="Your city or zip code" id="home-location" value="St. Louis, MO">
+        <input type="text" placeholder="Your city or zip code" id="home-location" onkeydown="if(event.key==='Enter')doSearch()" oninput="updatePopularHeading()">
         <button class="btn btn-sm" onclick="useMyLocation()">
         <i class="fa-solid fa-location-crosshairs"></i> Use my location
       </button>
@@ -809,7 +809,7 @@ button, input, select, textarea {
   <!-- Popular near you -->
   <div class="home-section">
     <div class="section-head">
-      <h2><i class="fa-solid fa-fire-flame-curved" style="color:var(--amber-dark);margin-right:5px;"></i>Popular near St. Louis</h2>
+      <h2><i class="fa-solid fa-fire-flame-curved" style="color:var(--amber-dark);margin-right:5px;"></i><span id="popular-heading">Popular picks</span></h2>
       <a onclick="showScreen('results')">See all</a>
     </div>
     <div class="popular-grid">
@@ -2406,6 +2406,7 @@ function updateLocationDisplays(loc) {
   ['home-location','userLocation','map-location-input'].forEach(id => {
     const el = document.getElementById(id); if (el) el.value = loc;
   });
+  updatePopularHeading();
 }
 function runPersonalizedSearch() {
   const checked = Array.from(
@@ -2421,9 +2422,16 @@ function runPersonalizedSearch() {
   showScreen('results');
   applySearchFilter(query);
 }
+function updatePopularHeading() {
+  const loc = document.getElementById('home-location')?.value.trim();
+  const heading = document.getElementById('popular-heading');
+  if (!heading) return;
+  heading.textContent = loc ? `Popular near ${loc}` : 'Popular picks';
+}
 // Load saved location on page load
 const savedLoc = localStorage.getItem('userLocation');
 if (savedLoc) updateLocationDisplays(savedLoc);
+else updatePopularHeading();
 // Init
 showScreen('home');
 </script>
