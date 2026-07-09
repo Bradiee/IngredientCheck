@@ -700,10 +700,18 @@ button, input, select, textarea {
     <a onclick="showModal('tos')">Terms of Service</a>
   </div>
 
-  <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);cursor:pointer;" onclick="changeLocation()">
-    <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
-    <span id="global-location">St. Louis, MO</span>
-    <i class="fa-solid fa-pen" style="font-size:10px;color:var(--text3);"></i>
+  <div class="nav-actions">
+    <div id="nav-user-badge">
+      Signed in as <span id="nav-username">User</span>
+      <button class="btn btn-sm btn-ghost" onclick="logout()">Sign out</button>
+    </div>
+    <div id="nav-auth-btns">
+      <button class="btn btn-sm btn-ghost" onclick="showModal('login')">Log in</button>
+      <button class="btn btn-sm btn-primary" onclick="showModal('signup')">Sign up</button>
+      <button class="btn btn-sm btn-retailer" onclick="showScreen('retailer-login')">
+        <i class="fa-solid fa-store"></i> Retailer login
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -723,9 +731,9 @@ button, input, select, textarea {
     <div class="search-box">
       <div class="search-location-row">
         <input type="text" placeholder="Your city or zip code" id="home-location" value="St. Louis, MO">
-        <button class="btn btn-sm" onclick="toast('Location set to your current position.','success')">
-          <i class="fa-solid fa-location-crosshairs"></i> Use my location
-        </button>
+        <button class="btn btn-sm" onclick="useMyLocation()">
+        <i class="fa-solid fa-location-crosshairs"></i> Use my location
+      </button>
       </div>
       <div class="search-main-row">
         <input class="form-control" type="text" id="home-search"
@@ -2296,15 +2304,23 @@ function collapseReminder(cb) {
     box.querySelector('h3').style.marginBottom = '';
   }
 }
-  function changeLocation() {
-  const current = localStorage.getItem('userLocation') || 'St. Louis, MO';
-  const loc = prompt('Enter your city or zip code:', current);
-  if (loc && loc.trim()) {
-    const clean = loc.trim();
-    localStorage.setItem('userLocation', clean);
-    updateLocationDisplays(clean);
-    toast('Location updated to ' + clean, 'success');
+ function useMyLocation() {
+  if (!navigator.geolocation) {
+    toast('Geolocation not supported by your browser.', 'error');
+    return;
   }
+  toast('Getting your location…');
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const lat = pos.coords.latitude.toFixed(4);
+      const lon = pos.coords.longitude.toFixed(4);
+      const label = `${lat}, ${lon}`;
+      localStorage.setItem('userLocation', label);
+      updateLocationDisplays(label);
+      toast('Location set!', 'success');
+    },
+    () => toast('Could not get your location. Check browser permissions.', 'error')
+  );
 }
 
 function updateLocationDisplays(loc) {
