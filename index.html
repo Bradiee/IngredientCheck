@@ -910,7 +910,7 @@ button, input, select, textarea {
 ══════════════════════════════════════════════ -->
 <div id="screen-results" class="screen">
   <div class="results-header">
-    <h2>Results for "<span id="results-query">dairy-free</span>" near St. Louis, MO</h2>
+    <h2>Results for "<span id="results-query">dairy-free</span>"<span id="results-location"></span></h2>
     <p>47 restaurants and products found — sorted by rating</p>
   </div>
   <div class="results-filters">
@@ -2156,6 +2156,7 @@ function doSearch() {
   const q = document.getElementById('home-search')?.value.trim() || '';
   const el = document.getElementById('results-query');
   if (el) el.textContent = q || 'all results';
+  updateResultsLocation();
   showScreen('results');
   applySearchFilter(q);
 }
@@ -2407,18 +2408,18 @@ function updateLocationDisplays(loc) {
     const el = document.getElementById(id); if (el) el.value = loc;
   });
   updatePopularHeading();
+  updateResultsLocation();
 }
 function runPersonalizedSearch() {
   const checked = Array.from(
     document.querySelectorAll('#modal-questionnaire input[type="checkbox"]:checked')
   ).map(cb => 'no ' + cb.parentElement.textContent.trim().toLowerCase());
-
   const query = checked.join(', ');
   const search = document.getElementById('home-search');
   if (search) search.value = query;
-
   closeModal();
   document.getElementById('results-query').textContent = query || 'your preferences';
+  updateResultsLocation();
   showScreen('results');
   applySearchFilter(query);
 }
@@ -2427,6 +2428,12 @@ function updatePopularHeading() {
   const heading = document.getElementById('popular-heading');
   if (!heading) return;
   heading.textContent = loc ? `Popular near ${loc}` : 'Popular picks';
+}
+function updateResultsLocation() {
+  const loc = document.getElementById('home-location')?.value.trim()
+    || localStorage.getItem('userLocation') || '';
+  const el = document.getElementById('results-location');
+  if (el) el.textContent = loc ? ` near ${loc}` : '';
 }
 // Load saved location on page load
 const savedLoc = localStorage.getItem('userLocation');
