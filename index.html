@@ -739,10 +739,15 @@ button, input, select, textarea {
 
     <div class="search-box">
       <div class="search-location-row">
-        <input type="text" placeholder="Your city or zip code" id="home-location" onkeydown="if(event.key==='Enter')doSearch()" oninput="updatePopularHeading()">
+        <div style="flex:1;position:relative;">
+          <input type="text" placeholder="Your city or zip code" id="home-location" style="width:100%;padding-right:32px;" onkeydown="if(event.key==='Enter')doSearch()" oninput="updatePopularHeading();updateBudgetHeading();toggleClearBtn()">
+          <button id="clear-location" onclick="clearLocation()" title="Clear location" style="display:none;position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px;padding:2px 4px;">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
         <button class="btn btn-sm" onclick="useMyLocation()">
-        <i class="fa-solid fa-location-crosshairs"></i> Use my location
-      </button>
+          <i class="fa-solid fa-location-crosshairs"></i> Use my location
+        </button>
       </div>
       <div class="search-main-row">
         <input class="form-control" type="text" id="home-search"
@@ -870,9 +875,9 @@ button, input, select, textarea {
   <!-- Cheap picks -->
   <div class="home-section">
     <div class="section-head">
-      <h2><i class="fa-solid fa-tag" style="color:var(--green);margin-right:5px;"></i>Budget-friendly picks</h2>
-      <a onclick="showScreen('results')">See all</a>
-    </div>
+    <h2><i class="fa-solid fa-tag" style="color:var(--green);margin-right:5px;"></i><span id="budget-heading">Budget-friendly picks</span></h2>
+    <a onclick="showScreen('results')">See all</a>
+  </div>
     <div class="popular-grid">
       <div class="popular-card" onclick="showScreen('detail')">
         <div class="popular-card-top">
@@ -2408,7 +2413,9 @@ function updateLocationDisplays(loc) {
     const el = document.getElementById(id); if (el) el.value = loc;
   });
   updatePopularHeading();
+  updateBudgetHeading();
   updateResultsLocation();
+  toggleClearBtn();
 }
 function runPersonalizedSearch() {
   const checked = Array.from(
@@ -2435,10 +2442,37 @@ function updateResultsLocation() {
   const el = document.getElementById('results-location');
   if (el) el.textContent = loc ? ` near ${loc}` : '';
 }
+function updateBudgetHeading() {
+  const loc = document.getElementById('home-location')?.value.trim();
+  const heading = document.getElementById('budget-heading');
+  if (!heading) return;
+  heading.textContent = loc ? `Budget-friendly picks near ${loc}` : 'Budget-friendly picks';
+}
+
+function toggleClearBtn() {
+  const val = document.getElementById('home-location')?.value.trim();
+  const btn = document.getElementById('clear-location');
+  if (btn) btn.style.display = val ? 'block' : 'none';
+}
+
+function clearLocation() {
+  document.getElementById('home-location').value = '';
+  localStorage.removeItem('userLocation');
+  const g = document.getElementById('global-location');
+  if (g) g.textContent = 'Set location';
+  ['userLocation','map-location-input'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
+  updatePopularHeading();
+  updateBudgetHeading();
+  updateResultsLocation();
+  toggleClearBtn();
+  toast('Location cleared.');
+}
 // Load saved location on page load
 const savedLoc = localStorage.getItem('userLocation');
 if (savedLoc) updateLocationDisplays(savedLoc);
-else updatePopularHeading();
+else { updatePopularHeading(); updateBudgetHeading(); toggleClearBtn(); }
 // Init
 showScreen('home');
 </script>
