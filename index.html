@@ -2304,20 +2304,34 @@ function collapseReminder(cb) {
     box.querySelector('h3').style.marginBottom = '';
   }
 }
- function useMyLocation() {
+function useMyLocation() {
   if (!navigator.geolocation) {
     toast('Geolocation not supported by your browser.', 'error');
     return;
   }
   toast('Getting your location…');
   navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      const lat = pos.coords.latitude.toFixed(4);
-      const lon = pos.coords.longitude.toFixed(4);
-      const label = `${lat}, ${lon}`;
-      localStorage.setItem('userLocation', label);
-      updateLocationDisplays(label);
-      toast('Location set!', 'success');
+    async (pos) => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+        );
+        const data = await res.json();
+        const a = data.address || {};
+        const city = a.city || a.town || a.village || a.county || '';
+        const state = a.state || '';
+        const label = (city && state) ? `${city}, ${state}` : `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+        localStorage.setItem('userLocation', label);
+        updateLocationDisplays(label);
+        toast('Location set to ' + label, 'success');
+      } catch (err) {
+        const fallback = `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+        localStorage.setItem('userLocation', fallback);
+        updateLocationDisplays(fallback);
+        toast('Got coordinates, but city lookup failed.', 'error');
+      }
     },
     () => toast('Could not get your location. Check browser permissions.', 'error')
   );
