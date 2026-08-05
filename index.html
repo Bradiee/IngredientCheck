@@ -2101,7 +2101,7 @@ button, input, select, textarea {
 ══════════════════════════════════════════════ -->
 <script>
 /* ── SCREEN ROUTING ────────────────────────── */
-function showScreen(id) {
+function showScreen(id, fromHistory) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById('screen-' + id);
   if (el) {
@@ -2118,7 +2118,7 @@ function showScreen(id) {
   const isPortal = id === 'retailer-portal' || id === 'retailer-login';
   if (authBtns) authBtns.style.display = isPortal ? 'none' : '';
   const ROUTES = { home:'#home', results:'#browse', detail:'#product', forum:'#forum', map:'#map', 'retailer-login':'#retailer', 'retailer-portal':'#portal' };
-  if (ROUTES[id]) history.pushState(null, '', ROUTES[id]);
+  if (ROUTES[id] && !fromHistory) history.pushState(null, '', ROUTES[id])
 
   const backBtn = document.getElementById('go-back');
   if (backBtn) backBtn.classList.toggle('visible', id !== 'home' && id !== 'detail');
@@ -2126,7 +2126,7 @@ function showScreen(id) {
 
 window.addEventListener('popstate', () => {
   const ROUTES = { '#home':'home', '#browse':'results', '#product':'detail', '#forum':'forum', '#map':'map', '#retailer':'retailer-login', '#portal':'retailer-portal' };
-  showScreen(ROUTES[location.hash] || 'home');
+  showScreen(ROUTES[location.hash] || 'home', true);
 });
 /* ── PORTAL VIEW ROUTING ────────────────────── */
 function showPortalView(id) {
