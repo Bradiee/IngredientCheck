@@ -2380,7 +2380,7 @@ function postThreadComment() {
   toast('Comment posted!', 'success');
 }
 window.addEventListener('scroll', () => {
-  document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 300);
+  document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 100);
 });
 function collapseReminder(cb) {
   const box = cb.closest('.reminder-box');
