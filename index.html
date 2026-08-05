@@ -198,7 +198,7 @@ button, input, select, textarea {
   Make it so that users can change their location on any page
   Put categories on top of the boxes "restaurant search…”
   Possible rename of the popular near st louis to quick options and add the budget-friendly picks to the categories
-  Make it so that the user can go back a page
+  Make it so that the user can go back with a button
   
 ════════════════════════════════════════════════ */
 #screen-home {}
@@ -718,7 +718,10 @@ button, input, select, textarea {
     <a onclick="showModal('help')">Help</a>
     <a onclick="showModal('tos')">Terms of Service</a>
   </div>
-
+  <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);">
+    <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+    <span id="global-location">Set location</span>
+  </div>
   <div class="nav-actions">
   <div id="nav-user-badge">
     Signed in as <span id="nav-username">User</span>
@@ -1063,7 +1066,7 @@ button, input, select, textarea {
     <div class="reminder-box">
       <h3><i class="fa-solid fa-circle-exclamation"></i> Before you eat — please read</h3>
       <p id="reminder-text">This data was reported by Mellow Mushroom to IngredientCheck. Recipes and formulas can change without notice. IngredientCheck is an information tool, not a medical guarantee. Always read the physical label and speak with the establishment manager before consuming if you have a serious allergy.</p>
-      <label><input type="checkbox"> I understand this is an information tool only and I consume at my own risk</label>
+      <label><input type="checkbox" onchange="collapseReminder(this)"> I understand this is an information tool only and I consume at my own risk</label>
     </div>
 
     <!-- Main detail card -->
@@ -2111,8 +2114,14 @@ function showScreen(id) {
   const authBtns = document.getElementById('nav-auth-btns');
   const isPortal = id === 'retailer-portal' || id === 'retailer-login';
   if (authBtns) authBtns.style.display = isPortal ? 'none' : '';
+  const ROUTES = { home:'#home', results:'#browse', detail:'#product', forum:'#forum', map:'#map', 'retailer-login':'#retailer', 'retailer-portal':'#portal' };
+  if (ROUTES[id]) history.pushState(null, '', ROUTES[id]);
 }
 
+window.addEventListener('popstate', () => {
+  const ROUTES = { '#home':'home', '#browse':'results', '#product':'detail', '#forum':'forum', '#map':'map', '#retailer':'retailer-login', '#portal':'retailer-portal' };
+  showScreen(ROUTES[location.hash] || 'home');
+});
 /* ── PORTAL VIEW ROUTING ────────────────────── */
 function showPortalView(id) {
   document.querySelectorAll('.portal-view').forEach(v => v.classList.remove('active'));
@@ -2432,6 +2441,7 @@ function runPersonalizedSearch() {
   const checked = Array.from(
     document.querySelectorAll('#modal-questionnaire input[type="checkbox"]:checked')
   ).map(cb => 'no ' + cb.parentElement.textContent.trim().toLowerCase());
+  if (checked.length === 0) { toast('Please select at least one thing to avoid.', 'error'); return; }
   const query = checked.join(', ');
   const search = document.getElementById('home-search');
   if (search) search.value = query;
