@@ -2121,7 +2121,7 @@ function showScreen(id) {
   if (ROUTES[id]) history.pushState(null, '', ROUTES[id]);
 
   const backBtn = document.getElementById('go-back');
-  if (backBtn) backBtn.classList.toggle('visible', id !== 'home');
+  if (backBtn) backBtn.classList.toggle('visible', id !== 'home' && id !== 'detail');
 }
 
 window.addEventListener('popstate', () => {
