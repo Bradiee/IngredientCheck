@@ -188,17 +188,13 @@ button, input, select, textarea {
 
 /* ════════════════════════════════════════════════
    SCREEN: HOME
-  
+
+  (Backend)
   Add in moveable map
   
-  When going into different windows, the link needs to change
-  After pressing the I understand box shorten the please read statement into a smaller window out of the users’ way
-  Make the personalized search not apply when left blank & ofc make that work
-  Make the search bar work for misspells 
-  Make it so that users can change their location on any page
-  Put categories on top of the boxes "restaurant search…”
-  Possible rename of the popular near st louis to quick options and add the budget-friendly picks to the categories
-  Make it so that the user can go back with a button
+  (Frontend)
+  Add the budget-friendly picks to the categories
+  Make it so that the user can go back with a button on every page after the home page a black arrow facing backwards to go back
   
 ════════════════════════════════════════════════ */
 #screen-home {}
@@ -630,7 +626,7 @@ button, input, select, textarea {
 #back-to-top:hover { background: var(--green-dark); }
 #back-to-top.visible { display: flex; }
 #back-to-top {
-  position: fixed; bottom: 24px; left: 24px; z-index: 998;
+  position: fixed; bottom: 24px; left: 78px; z-index: 998;
   width: 44px; height: 44px; border-radius: 50%;
   background: var(--green); color: #fff;
   border: none; cursor: pointer; font-size: 16px;
@@ -653,15 +649,16 @@ button, input, select, textarea {
 .site-footer a { color: #7dd3bc; cursor: pointer; }
 .site-footer a:hover { text-decoration: underline; }
 #go-back {
-  position: fixed; bottom: 24px; left: 78px; z-index: 998;
+  position: fixed; bottom: 24px; left: 24px; z-index: 998;
   width: 44px; height: 44px; border-radius: 50%;
-  background: #fff; color: var(--text2);
-  border: 1px solid var(--border2); cursor: pointer; font-size: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  display: flex; align-items: center; justify-content: center;
+  background: #1a1a1a; color: #fff;
+  border: none; cursor: pointer; font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  display: none; align-items: center; justify-content: center;
   transition: background 0.15s;
 }
-#go-back:hover { background: var(--bg2); }
+#go-back:hover { background: #333; }
+#go-back.visible { display: flex; }
 .site-footer {
   background: #1a1a2e; color: #c0c4d8;
   padding: 2rem; margin-top: 3rem;
@@ -818,6 +815,12 @@ button, input, select, textarea {
     <div class="feature-icon" style="color:#7F77DD"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
     <h3>Personalized search</h3>
     <p>Answer a few questions, get tailored results</p>
+  </div>
+  <div class="feature-card" onclick="showScreen('home');document.getElementById('budget-heading').scrollIntoView({behavior:'smooth'})">
+    <span class="feature-cat">Value</span>
+    <div class="feature-icon" style="color:var(--green)"><i class="fa-solid fa-tag"></i></div>
+    <h3>Budget-friendly</h3>
+    <p>Find the cheapest safe options near you</p>
   </div>
   <div class="feature-card" onclick="showScreen('map')">
     <span class="feature-cat">Explore</span>
@@ -2116,6 +2119,9 @@ function showScreen(id) {
   if (authBtns) authBtns.style.display = isPortal ? 'none' : '';
   const ROUTES = { home:'#home', results:'#browse', detail:'#product', forum:'#forum', map:'#map', 'retailer-login':'#retailer', 'retailer-portal':'#portal' };
   if (ROUTES[id]) history.pushState(null, '', ROUTES[id]);
+
+  const backBtn = document.getElementById('go-back');
+  if (backBtn) backBtn.classList.toggle('visible', id !== 'home');
 }
 
 window.addEventListener('popstate', () => {
@@ -2588,6 +2594,9 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
+<button id="go-back" onclick="history.back()" title="Go back">
+  <i class="fa-solid fa-arrow-left"></i>
+</button>
 <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <i class="fa-solid fa-arrow-up"></i>
 </button>
