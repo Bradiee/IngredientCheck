@@ -1167,6 +1167,7 @@ button, input, select, textarea {
   <div class="forum-wrap">
     <div class="forum-header">
       <h1>Community forum</h1>
+      <button type="button" onclick="insertEmoji('new-post-body')" style="border:none;background:none;cursor:pointer;font-size:18px;margin-bottom:6px;">😊 Add emoji</button>
       <button class="btn btn-primary" onclick="showModal('new-post')"><i class="fa-solid fa-plus"></i> New post</button>
     </div>
     <div class="forum-search-row">
@@ -1890,10 +1891,11 @@ button, input, select, textarea {
         <option>General</option>
       </select>
     </div>
-    <div class="form-group" style="margin-bottom:0;">
-      <label>Your post</label>
-      <textarea class="form-control" rows="5" placeholder="Write your post…"></textarea>
-    </div>
+   <div class="form-group" style="margin-bottom:0;">
+    <label>Your post</label>
+    <button type="button" onclick="insertEmoji('new-post-body')" style="border:none;background:none;cursor:pointer;font-size:18px;margin-bottom:6px;">😊 Add emoji</button>
+    <textarea class="form-control" id="new-post-body" rows="5" placeholder="Write your post…"></textarea>
+  </div>
     <div class="modal-footer">
       <button class="btn" onclick="closeModal()">Cancel</button>
       <button class="btn btn-primary" onclick="closeModal();toast('Post published!','success')">Publish post</button>
@@ -1910,15 +1912,13 @@ button, input, select, textarea {
   </div>
   <h2 id="thread-title" style="font-size:19px;margin-bottom:8px;"></h2>
   <p id="thread-body" style="color:var(--text2);font-size:15px;line-height:1.7;background:#fff;border-radius:20px;padding:14px 18px;margin-bottom:14px;"></p>
-  <div id="thread-reactions" style="display:flex;gap:6px;margin:12px 0;flex-wrap:wrap;">
-    <button onclick="reactThread(this,'👍')" style="border:1px solid var(--border2);background:#fff;border-radius:99px;padding:4px 12px;cursor:pointer;font-size:14px;transition:all 0.15s;">👍 <span>0</span></button>
-    <button onclick="reactThread(this,'❤️')" style="border:1px solid var(--border2);background:#fff;border-radius:99px;padding:4px 12px;cursor:pointer;font-size:14px;transition:all 0.15s;">❤️ <span>0</span></button>
-    <button onclick="reactThread(this,'😋')" style="border:1px solid var(--border2);background:#fff;border-radius:99px;padding:4px 12px;cursor:pointer;font-size:14px;transition:all 0.15s;">😋 <span>0</span></button>
-    <button onclick="reactThread(this,'🎉')" style="border:1px solid var(--border2);background:#fff;border-radius:99px;padding:4px 12px;cursor:pointer;font-size:14px;transition:all 0.15s;">🎉 <span>0</span></button>
+  <div style="margin:12px 0;">
+    <button id="thread-like-btn" onclick="likeFromThread()" class="forum-btn"><i class="fa-solid fa-heart"></i> Like (<span id="thread-like-count">0</span>)</button>
   </div>
   <h3 style="font-size:14px;font-weight:600;margin:0.75rem 0;"><span id="thread-count">0</span> comments</h3>
   <div id="thread-replies" style="max-height:280px;overflow-y:auto;"></div>
-  <div style="margin-top:1rem;border:1px solid #000;border-radius:24px;padding:6px 6px 6px 18px;display:flex;align-items:center;gap:8px;background:#fff;transition:box-shadow 0.2s;" onfocusin="this.style.boxShadow='0 2px 8px rgba(29,158,117,0.2)'" onfocusout="this.style.boxShadow='none'">
+  <div style="margin-top:1rem;border:1px solid #000;border-radius:24px;padding:6px 6px 6px 12px;display:flex;align-items:center;gap:8px;background:#fff;transition:box-shadow 0.2s;" onfocusin="this.style.boxShadow='0 2px 8px rgba(29,158,117,0.2)'" onfocusout="this.style.boxShadow='none'">
+    <button onclick="insertEmoji('thread-comment')" style="border:none;background:none;cursor:pointer;font-size:18px;flex-shrink:0;">😊</button>
     <input type="text" id="thread-comment" placeholder="Add a comment…" style="flex:1;border:none;outline:none;font-size:14px;background:transparent;" onkeydown="if(event.key==='Enter')postThreadComment()">
     <button onclick="postThreadComment()" style="border:none;background:var(--green);color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;flex-shrink:0;"><i class="fa-solid fa-paper-plane"></i></button>
   </div>
@@ -2350,6 +2350,22 @@ function likePost(i) {
     btn.classList.add('liked');
   }
 }
+function likeFromThread() {
+  const i = currentThread;
+  const forumCount = document.getElementById('like-count-' + i);
+  const threadCount = document.getElementById('thread-like-count');
+  const btn = document.getElementById('thread-like-btn');
+  if (likedPosts[i]) {
+    forumCount.textContent = +forumCount.textContent - 1;
+    likedPosts[i] = false;
+    btn.classList.remove('liked');
+  } else {
+    forumCount.textContent = +forumCount.textContent + 1;
+    likedPosts[i] = true;
+    btn.classList.add('liked');
+  }
+  threadCount.textContent = forumCount.textContent;
+}
 function sharePost(i) {
   const link = "https://theingredientcheck.com/#forum-post-" + i;
   navigator.clipboard?.writeText(link);
@@ -2373,8 +2389,8 @@ function openThread(i) {
   document.getElementById('thread-body').textContent = d.body;
   const who = (threadMeta[i] || 'U').replace('Posted by ','').charAt(0);
   document.getElementById('thread-avatar').textContent = who;
-  document.querySelectorAll('#thread-reactions button span').forEach(s => s.textContent = '0');
-  document.querySelectorAll('#thread-reactions button').forEach(b => { b.style.background = '#fff'; b.style.borderColor = 'var(--border2)'; });
+  document.getElementById('thread-like-count').textContent = document.getElementById('like-count-' + i).textContent;
+  document.getElementById('thread-like-btn').classList.toggle('liked', !!likedPosts[i]);
   renderReplies();
   showModal('thread');
 }
@@ -2430,6 +2446,14 @@ function postThreadComment() {
 window.addEventListener('scroll', () => {
   document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 100);
 });
+const EMOJI_SET = ['😊','😋','👍','❤️','🎉','🔥','🥳','😍','🙌','🤤','🌱','🍰','🍕','⚠️'];
+function insertEmoji(targetId) {
+  const el = document.getElementById(targetId);
+  if (!el) return;
+  const pick = prompt('Pick an emoji:\n' + EMOJI_SET.join('  '));
+  if (pick) el.value += pick;
+  el.focus();
+}
 function collapseReminder(cb) {
   const box = cb.closest('.reminder-box');
   const text = document.getElementById('reminder-text');
