@@ -688,6 +688,8 @@ button, input, select, textarea {
   display: flex; justify-content: space-between; align-items: center;
 }
 @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+#thread-reactions button { transition: transform 0.12s, background 0.15s; }
+#thread-reactions button:hover { transform: translateY(-2px); }
 </style>
 </head>
 <body>
@@ -1898,7 +1900,7 @@ button, input, select, textarea {
     </div>
   </div>
   <!--Forum Modal -->
-<div id="modal-thread" class="modal hidden" style="max-width:620px;border:3px solid #000;border-radius:28px;background:#f4faf7;box-shadow:0 12px 40px rgba(0,0,0,0.25);">
+<div id="modal-thread" class="modal hidden" style="max-width:620px;border:3px solid rgba(0,0,0,0.55);border-radius:28px;background:#f4faf7;">
   <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
   <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
     <div id="thread-avatar" style="width:44px;height:44px;border-radius:50%;background:var(--green-light);color:var(--green-dark);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:18px;flex-shrink:0;"></div>
@@ -2397,15 +2399,17 @@ function renderReplies() {
   const box = document.getElementById('thread-replies');
   const d = forumData[currentThread];
   document.getElementById('thread-count').textContent = d.replies.length;
+  const colors = [['#E1F5EE','#0F6E56'],['#E6F1FB','#185FA5'],['#FAEEDA','#854F0B'],['#FCEBEB','#A32D2D'],['#EDE9FB','#5B3F9E']];
   if (d.replies.length === 0) {
     box.innerHTML = '<p style="color:var(--text3);font-size:14px;">No comments yet. Be the first!</p>';
   } else {
-    box.innerHTML = d.replies.map(r =>
-  `<div style="display:flex;gap:10px;padding:12px;margin-bottom:8px;background:#fff;border-radius:16px;">
-    <div style="width:36px;height:36px;border-radius:50%;background:var(--green-light);color:var(--green-dark);display:flex;align-items:center;justify-content:center;font-weight:600;flex-shrink:0;">${r.who.charAt(0)}</div>
-    <div><div style="font-size:14px;font-weight:600;">${r.who}</div><div style="font-size:14px;color:var(--text2);">${r.text}</div></div>
-  </div>`
-).join('');
+    box.innerHTML = d.replies.map((r, idx) => {
+      const c = colors[r.who.charCodeAt(0) % colors.length];
+      return `<div style="display:flex;gap:10px;padding:12px;margin-bottom:8px;background:#fff;border-radius:16px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:${c[0]};color:${c[1]};display:flex;align-items:center;justify-content:center;font-weight:600;flex-shrink:0;">${r.who.charAt(0)}</div>
+        <div><div style="font-size:14px;font-weight:600;">${r.who} <span style="font-size:12px;color:var(--text3);font-weight:400;">· ${r.time || '2h ago'}</span></div><div style="font-size:14px;color:var(--text2);">${r.text}</div></div>
+      </div>`;
+    }).join('');
   }
 }
 function postThreadComment() {
@@ -2416,7 +2420,7 @@ function postThreadComment() {
   const t = document.getElementById('thread-comment');
   const text = t.value.trim();
   if (!text) { toast('Please write a comment first.', 'error'); return; }
-  forumData[currentThread].replies.push({ who:"You", text });
+  forumData[currentThread].replies.push({ who:"You", text, time:"just now" });
   document.getElementById('reply-count-' + currentThread).textContent =
     +document.getElementById('reply-count-' + currentThread).textContent + 1;
   t.value = '';
