@@ -1385,10 +1385,9 @@ button, input, select, textarea {
         <!-- VIEW: DASHBOARD -->
         <div id="portal-view-dashboard" class="portal-view active">
           <div class="alert-pending">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <span>You have 3 unreviewed user reports about ingredient discrepancies. <a style="color:var(--amber-dark);text-decoration:underline;cursor:pointer;" onclick="showPortalView('reports')">Review them now</a></span>
-          </div>
-
+          <span style="font-size:16px;">⚠️</span>
+          <span>You have 3 unreviewed user reports about ingredient discrepancies. <a style="color:var(--amber-dark);text-decoration:underline;cursor:pointer;" onclick="showPortalView('reports')">Review them now</a></span>
+        </div>
           <div class="stats-grid">
             <div class="stat-card" onclick="showPortalView('products')" style="cursor:pointer;">
               <div class="stat-label">Products listed</div>
@@ -1420,7 +1419,7 @@ button, input, select, textarea {
               <div onclick="showPortalView('products')" style="cursor:pointer;"><i class="fa-solid fa-circle-check" style="color:var(--green);margin-right:8px;"></i>Vegan Pizza ingredient data approved — Jun 12, 2026</div>
               <div onclick="showPortalView('reports')" style="cursor:pointer;"><i class="fa-solid fa-flag" style="color:var(--red);margin-right:8px;"></i>User report submitted for Garlic Knots — Jun 17, 2026</div>
               <div onclick="showPortalView('reviews')" style="cursor:pointer;"><i class="fa-solid fa-star" style="color:var(--amber-dark);margin-right:8px;"></i>New 5-star review from Sarah K. — Jun 3, 2026</div>
-              <div onclick="showPortalView('products')" style="cursor:pointer;"><i class="fa-solid fa-pen" style="color:var(--blue);margin-right:8px;"></i>You updated BBQ Chicken Pizza ingredients — May 28, 2026</div>
+              <div onclick="showPortalView('products')" style="cursor:pointer;">✏️ You updated BBQ Chicken Pizza ingredients — May 28, 2026</div>
             </div>
           </div>
         </div>
