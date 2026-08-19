@@ -1168,7 +1168,6 @@ button, input, select, textarea {
   <div class="forum-wrap">
     <div class="forum-header">
       <h1>Community forum</h1>
-      <button type="button" onclick="insertEmoji('new-post-body')" style="border:none;background:none;cursor:pointer;font-size:18px;margin-bottom:6px;">😊 Add emoji</button>
       <button class="btn btn-primary" onclick="showModal('new-post')"><i class="fa-solid fa-plus"></i> New post</button>
     </div>
     <div class="forum-search-row">
@@ -2133,7 +2132,7 @@ function showScreen(id, fromHistory) {
   if (ROUTES[id] && !fromHistory) history.pushState(null, '', ROUTES[id])
 
   const backBtn = document.getElementById('go-back');
-  if (backBtn) backBtn.classList.toggle('visible', id !== 'home' && id !== 'detail');
+  if (backBtn) backBtn.classList.toggle('visible', id !== 'home' && id !== 'detail' && id !== 'retailer-portal' && id !== 'retailer-login');
 }
 
 window.addEventListener('popstate', () => {
@@ -2448,13 +2447,44 @@ window.addEventListener('scroll', () => {
   document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 100);
 });
 const EMOJI_SET = ['😊','😋','👍','❤️','🎉','🔥','🥳','😍','🙌','🤤','🌱','🍰','🍕','⚠️'];
+let emojiTarget = null;
+  
 function insertEmoji(targetId) {
-  const el = document.getElementById(targetId);
-  if (!el) return;
-  const pick = prompt('Pick an emoji:\n' + EMOJI_SET.join('  '));
-  if (pick) el.value += pick;
-  el.focus();
+  emojiTarget = targetId;
+  let panel = document.getElementById('emoji-panel');
+  if (!panel) {
+    panel = document.createElement('div');
+    panel.id = 'emoji-panel';
+    panel.style.cssText = 'position:fixed;z-index:300;background:#fff;border:1px solid var(--border2);border-radius:12px;padding:8px;box-shadow:0 4px 16px rgba(0,0,0,0.2);display:flex;flex-wrap:wrap;gap:4px;max-width:220px;';
+    EMOJI_SET.forEach(em => {
+      const b = document.createElement('button');
+      b.textContent = em;
+      b.style.cssText = 'border:none;background:none;font-size:20px;cursor:pointer;padding:4px;border-radius:6px;';
+      b.onmouseover = () => b.style.background = 'var(--green-light)';
+      b.onmouseout = () => b.style.background = 'none';
+      b.onclick = () => {
+        const el = document.getElementById(emojiTarget);
+        if (el) { el.value += em; el.focus(); }
+        panel.style.display = 'none';
+      };
+      panel.appendChild(b);
+    });
+    document.body.appendChild(panel);
+  }
+  // Position near the button that was clicked
+  const rect = event.currentTarget.getBoundingClientRect();
+  panel.style.top = (rect.bottom + 6) + 'px';
+  panel.style.left = rect.left + 'px';
+  panel.style.display = 'flex';
 }
+
+// Close the emoji panel when clicking elsewhere
+document.addEventListener('click', (e) => {
+  const panel = document.getElementById('emoji-panel');
+  if (panel && !panel.contains(e.target) && !e.target.onclick?.toString().includes('insertEmoji')) {
+    panel.style.display = 'none';
+  }
+}, true);
 function collapseReminder(cb) {
   const box = cb.closest('.reminder-box');
   const text = document.getElementById('reminder-text');
