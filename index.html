@@ -71,7 +71,7 @@ button, input, select, textarea {
 
 /* ── NAVIGATION ───────────────────────────────── */
 #nav {
-  position: sticky; top: 38px; z-index: 50;
+  position: sticky; top: 0; z-index: 50;
   background: #fff;
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center;
@@ -791,9 +791,17 @@ button, input, select, textarea {
 
   <!-- Feature tiles -->
   <div class="feature-grid">
-  <div class="feature-card" onclick="showScreen('results')">
-    <span class="feature-cat">Search</span>
-    <div class="feature-icon" style="color:var(--green)"><i class="fa-solid fa-utensils"></i></div>
+    <div class="feature-card" onclick="showScreen('results')">
+      <span class="feature-cat">Search</span>
+      <div class="feature-icon" style="color:var(--green)"><i class="fa-solid fa-magnifying-glass"></i></div>
+      <h3>Browse Database</h3>
+      <p>Explore safe food options by store or category.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
     <h3>Restaurant search</h3>
     <p>Find allergen-friendly dishes near you</p>
   </div>
