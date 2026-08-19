@@ -1374,9 +1374,9 @@ button, input, select, textarea {
         <h2 id="portal-title">Dashboard</h2>
         <div class="portal-topbar-right">
           <span style="background:#1a1a2e;color:#7dd3bc;font-size:12px;font-weight:600;padding:4px 12px;border-radius:99px;border:1px solid rgba(125,211,188,0.3);">
-            <i class="fa-solid fa-store"></i> Retailer View
+            🏪 Retailer View
           </span>
-          <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+          <span class="verified-badge">✅ Verified</span>
           <span style="font-size:13px;color:var(--text2);">Mellow Mushroom — Sunset Hills</span>
         </div>
       </div>
@@ -1490,14 +1490,14 @@ button, input, select, textarea {
         -->
         <div id="portal-view-add-product" class="portal-view">
           <div style="background:var(--amber-light);border:1px solid var(--amber);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.25rem;font-size:13px;color:var(--amber-dark);display:flex;gap:10px;align-items:flex-start;">
-            <i class="fa-solid fa-triangle-exclamation" style="flex-shrink:0;margin-top:2px;"></i>
+            <span style="flex-shrink:0;">⚠️</span>
             <span><strong>This product was not originally submitted by you.</strong> The current data comes from a third-party database. Once you save, your submission will replace it and display the <strong>Retailer-verified</strong> badge.</span>
           </div>
           <div class="portal-section-head" style="margin-bottom:1.5rem;">
             <h3>Add or update a product</h3>
           </div>
           <div class="security-note" style="margin-bottom:1.5rem;">
-            <i class="fa-solid fa-shield-halved" style="color:var(--green);"></i>
+            <span style="flex-shrink:0;">🛡️</span>
             <span>All submissions are reviewed by a IngredientCheck moderator before going live. Changes to ingredient data typically take 1–2 business days to appear publicly. You will receive an email confirmation when approved.</span>
           </div>
           <div class="card">
@@ -1619,8 +1619,8 @@ button, input, select, textarea {
               <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:10px;">A user reported that the garlic knots now use a butter blend containing dairy, but the listing still says no dairy ingredients. They attached a label photo showing butter (milk).</p>
             <div style="font-size:12px;color:var(--text3);margin-bottom:10px;">Reported by a verified user · June 17, 2026</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button class="btn btn-primary btn-sm" onclick="showPortalView('add-product')"><i class="fa-solid fa-pen"></i> Update listing</button>
-              <button class="btn btn-sm" onclick="toast('Report escalated to moderator.','success')"><i class="fa-solid fa-flag"></i> Escalate to moderator</button>
+              <button class="btn btn-primary btn-sm" onclick="showPortalView('add-product')">✏️ Update listing</button>
+              <button class="btn btn-sm" onclick="toast('Report escalated to moderator.','success')">🚩 Escalate to moderator</button>
               <button class="btn btn-sm btn-ghost" onclick="toast('Report marked as reviewed.')">Mark reviewed</button>
             </div>
           </div>
@@ -1661,7 +1661,7 @@ button, input, select, textarea {
               <div class="review-date">June 3, 2026</div>
             </div>
             <div class="review-body" style="margin-bottom:10px;">Finally a place that genuinely understands dairy-free! I have a casein allergy and the staff was knowledgeable and careful.</div>
-            <button class="btn btn-sm" onclick="showModal('reply-review')"><i class="fa-solid fa-reply"></i> Respond as retailer</button>
+            <button class="btn btn-sm" onclick="showModal('reply-review')">↩️ Respond as retailer</button>
           </div>
           <div class="review-card">
             <div class="review-top">
