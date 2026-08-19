@@ -60,7 +60,6 @@ button, input, select, textarea {
   --radius:      10px;
   --radius-lg:   14px;
   --shadow:      0 1px 4px rgba(0,0,0,0.08);
-  --accent: #1D9E75;
 }
 
 /* ── UTILITY ──────────────────────────────────── */
@@ -84,10 +83,6 @@ button, input, select, textarea {
   color: var(--green); letter-spacing: -0.5px;
   display: flex; align-items: center; gap: 7px;
   cursor: pointer;
-  flex: 1;
-}
-.nav-actions {
-  flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 10px;
 }
 .nav-logo span { color: var(--text1); font-weight: 600; }
 .nav-links { display: flex; align-items: center; gap: 1.5rem; }
@@ -97,7 +92,7 @@ button, input, select, textarea {
   border-bottom: 2px solid transparent;
   transition: color 0.15s;
 }
-.nav-links a:hover, .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+.nav-links a:hover, .nav-links a.active { color: var(--green); border-bottom-color: var(--green); }
 .nav-links { display: flex; align-items: center; gap: 2rem; flex: 1; justify-content: center; }
 #nav-user-badge {
   display: none; align-items: center; gap: 8px;
@@ -121,8 +116,8 @@ button, input, select, textarea {
   white-space: nowrap;
 }
 .btn:hover { background: var(--bg2); }
-.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-.btn-primary:hover { filter: brightness(0.9); }
+.btn-primary { background: var(--green); color: #fff; border-color: var(--green); }
+.btn-primary:hover { background: var(--green-dark); border-color: var(--green-dark); }
 .btn-sm { padding: 5px 13px; font-size: 13px; }
 .btn-ghost { border-color: transparent; background: transparent; color: var(--text2); }
 .btn-ghost:hover { background: var(--bg2); color: var(--text1); }
@@ -1696,8 +1691,8 @@ button, input, select, textarea {
             <h4 style="font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem;">Display preferences</h4>
             <div class="form-row">
               <div class="form-group">
-                <label>Accent color (buttons & nav hover)</label>
-                <input type="color" id="userAccent" value="#1D9E75" class="form-control" style="height:42px;padding:4px;">
+                <label>Page background color</label>
+                <input type="color" id="pageColor" value="#f5f7f5" class="form-control" style="height:42px;padding:4px;">
               </div>
               <div class="form-group">
                 <label>Font style</label>
@@ -2664,12 +2659,12 @@ function applyProfileSettings() {
 }
 /* ── USER account settings ── */
 function applyUserSettings() {
-  const accent = document.getElementById("userAccent").value;
+  const c = document.getElementById("userPageColor").value;
   const f = document.getElementById("userFontStyle").value;
   const loc = document.getElementById("userLocation").value;
-  document.documentElement.style.setProperty('--accent', accent);
+  document.body.style.backgroundColor = c;
   document.body.style.fontFamily = f;
-  localStorage.setItem("accent", accent);
+  localStorage.setItem("pageColor", c);
   localStorage.setItem("fontStyle", f);
   if (loc) localStorage.setItem("userLocation", loc);
   closeModal();
@@ -2681,12 +2676,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const savedColor = localStorage.getItem("pageColor");
   const savedFont = localStorage.getItem("fontStyle");
   const savedLoc = localStorage.getItem("userLocation");
-
-  const savedAccent = localStorage.getItem("accent");
-  if (savedAccent) {
-    document.documentElement.style.setProperty('--accent', savedAccent);
-    const el = document.getElementById("userAccent"); if (el) el.value = savedAccent;
-  }
 
   if (savedColor) {
     document.body.style.backgroundColor = savedColor;
